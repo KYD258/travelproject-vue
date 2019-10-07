@@ -8,6 +8,9 @@ import userLogin from '@/components/userLogin'
 import userResgister from '@/components/userResgister'
 import SysUserOrder from '@/components/SysUserOrder'
 import SysOrderUpdate from '@/components/SysOrderUpdate'
+import add from '@/components/add'
+import update from '@/components/update'
+import routeshow from '@/components/routeshow'
 Vue.use(Router)
 
 export default new Router({
@@ -19,6 +22,9 @@ export default new Router({
     {path:'/userLogin',name:'userLogin',component:userLogin},
     {path:'/userResgister',name:'userResgister',component:userResgister},
     {path:'/SysUserOrder',name:'SysUserOrder',component:SysUserOrder},
-    {path:'/SysOrderUpdate/:orderId',name:'SysOrderUpdate',component:SysOrderUpdate}
+    {path:'/SysOrderUpdate/:orderId',name:'SysOrderUpdate',component:SysOrderUpdate},
+    {path:'/add',name:'add',component:add},
+    {path:'/update/:attrId',name:'update',component:update},
+    {path:'/routeshow',name:'routeshow',component:routeshow}
   ]
 })
