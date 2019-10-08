@@ -5,7 +5,6 @@
       <span style="height:100px;width:200px;font-size: 40px; line-height:100px;text-align: center">千峰旅游</span>
     </div>
     <el-menu
-      :default-active="activeIndex2"
       class="el-menu-demo"
       mode="horizontal"
       @select="handleSelect"
@@ -39,8 +38,8 @@
     <hr style="background-color:#2577e1;height:0.5px;width: 100%">
     <template>
       <el-carousel :interval="4000" type="card" height="400px">
-        <el-carousel-item v-for="item in 6" :key="item">
-          <h3 class="medium">{{ item }}</h3>
+        <el-carousel-item v-for="sysattr in sysattr" :key="sysattr">
+         <img :src="sysattr.attrPic" style="width:751px;height:400px  ">
         </el-carousel-item>
       </el-carousel>
     </template>
@@ -49,32 +48,145 @@
       <el-header>精选套餐</el-header>
       <el-container>
         <el-aside width="200px">用户评价</el-aside>
-        <el-main>套餐展示</el-main>
+        <el-main>
+          <el-table align="center"
+                    :data="sysroute"
+                    border
+                    style="width: 100%">
+            <el-table-column align="center"
+                             prop="routeName"
+                             label="名称"
+                             width="150">
+            </el-table-column>
+            <el-table-column align="center"
+                             label="图片"
+                             width="180">
+              <template slot-scope="sysroute">
+                <img :src="sysroute.row.routePic" width="100" height="100" class="routePic"/>
+              </template>
+            </el-table-column>
+            <el-table-column align="center"
+                             prop="routeInfo1"
+                             label="卖点">
+            </el-table-column>
+            <el-table-column align="center"
+                             prop="routeInfo2"
+                             label="卖点">
+            </el-table-column>
+            <el-table-column align="center"
+                             prop="routeTime"
+                             label="时间">
+            </el-table-column>
+            <el-table-column align="center"
+                             prop="routePrice"
+                             label="价格"
+                             width="100">
+            </el-table-column>
+            <el-table-column align="center"
+                             prop="routeNum"
+                             label="人数"
+                             width="100">
+            </el-table-column>
+            <el-table-column align="center"
+                             prop="routeDay"
+                             label="时间"
+                             width="100">
+            </el-table-column>
+          </el-table>
+
+          <el-pagination
+            background
+            layout="prev, next"
+            :page-size="this.params.size"
+            v-on:current-change="changePage1"
+            :total="total" :current-page="this.params.page">
+          </el-pagination>
+        </el-main>
       </el-container>
     </el-container>
+
     <el-container>
       <el-header>景点推荐</el-header>
       <el-container>
         <el-aside width="200px">用户评价</el-aside>
-        <el-main>景点展示</el-main>
+        <el-main>
+          <el-table align="center"
+                    :data="sysattr"
+                    border
+                    style="width: 100%">
+            <el-table-column align="center"
+                             prop="attrName"
+                             label="名称"
+                             width="150">
+            </el-table-column>
+            <el-table-column align="center"
+                             label="图片"
+                             width="180">
+              <template slot-scope="sysattr">
+                <img :src="sysattr.row.attrPic" width="100" height="100" class="attrPic"/>
+              </template>
+            </el-table-column>
+            <el-table-column align="center"
+                             prop="attrInfo"
+                             label="卖点">
+            </el-table-column>
+          </el-table>
+
+          <el-pagination
+            background
+            layout="prev,  next"
+            :page-size="this.params.size"
+            v-on:current-change="changePage"
+            :total="total" :current-page="this.params.page">
+          </el-pagination>
+        </el-main>
       </el-container>
     </el-container>
   </div>
 </template>
 <script>
+  import axios from 'axios'
   export default{
       data(){
           return{
-            sysattr:{
-              attrId:'',
-              attrName:'',
-              attrPic:'',
-              attrAddress:'',
-              attrInfo:'',
-              attrPrice:''
+            sysattr:[],
+            sysroute:[],
+            total: 0,
+            params: {
+              size: 4,
+              page: 1
             }
           }
+      },
+    mounted(){
+          this.query(),
+            this.query1()
+    },
+    methods:{
+      query:function () {
+        var url ="api/attr/selectAll/"+this.params.page+"/"+this.params.size
+        axios.get(url).then(res=>{
+          this.sysattr=res.data.list;
+          this.total=res.data.total;
+        })
+      },
+      changePage:function (page) {
+        this.params.page=page;
+        this.query();
+      },
+
+      query1:function () {
+        var url ="api/route/selectAll/"+this.params.page+"/"+this.params.size
+        axios.get(url).then(res=>{
+          this.sysroute=res.data.list;
+          this.total=res.data.total;
+        })
+      },
+      changePage1:function (page) {
+        this.params.page=page;
+        this.query1();
       }
+    }
   }
 </script>
 <style>
