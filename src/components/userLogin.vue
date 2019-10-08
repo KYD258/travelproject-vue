@@ -9,7 +9,6 @@
         <el-input type="password" v-model="user.password" autocomplete="off"></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="submitForm('user')">登录</el-button>
         <el-button type="primary" @click="submitForm('user')">登陆</el-button>
         <el-button @click="resetForm('user')">重置</el-button>
       </el-form-item>
