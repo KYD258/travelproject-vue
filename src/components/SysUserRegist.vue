@@ -40,7 +40,7 @@
         axios.post(url,this.user).then(res=>{
             alert(res.data)
           if(res.data==1){
-            this.$router.push("/")
+            this.$router.push("/SysUserLogin")
           }else {
             alert("用户名已存在")
           }
