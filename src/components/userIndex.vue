@@ -16,7 +16,7 @@
       <el-menu-item index="3">机票</el-menu-item>
       <el-menu-item index="4">订酒店</el-menu-item>
       <el-menu-item index="5">消息中心</el-menu-item>
-      <el-menu-item index="6">购物车</el-menu-item>
+      <el-menu-item index="6"><router-link to="/cart" >购物车</router-link></el-menu-item>
       <el-menu-item index="7">订单管理</el-menu-item>
       <el-menu-item index="8">
         <div>
