@@ -9,7 +9,7 @@
         <el-input type="password" v-model="user.password" autocomplete="off"></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="submitForm('user')">提交</el-button>
+        <el-button type="primary" @click="submitForm('user')">登陆</el-button>
         <el-button @click="resetForm('user')">重置</el-button>
       </el-form-item>
     </el-form>
@@ -49,9 +49,10 @@
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            alert('submit!');
+            //alert('submit!');
             axios.post("/api/userLogin",this.user).then(res=>{
                 alert("登录成功")
+              this.$router.push("/")
             });
           } else {
             console.log('error submit!!');

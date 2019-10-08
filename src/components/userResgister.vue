@@ -59,9 +59,10 @@
       },
       register:function () {
         axios.post("/api/userRegister",{"tbUser":this.tbUser,"code":this.code}).then(res=>{
-            alert(this.tbUser + this.code)
+           // alert(this.tbUser + this.code)
             if(res.data.code==1){
                 alert("注册成功");
+              this.$router.push("/userLogin")
             }else {
                 alert("失败")
             }
