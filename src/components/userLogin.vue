@@ -10,6 +10,7 @@
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="submitForm('user')">登录</el-button>
+        <el-button type="primary" @click="submitForm('user')">登陆</el-button>
         <el-button @click="resetForm('user')">重置</el-button>
       </el-form-item>
     </el-form>
@@ -49,8 +50,9 @@
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
+            alert('submit!');
             axios.post("/api/userLogin",this.user).then(res=>{
-              this.$router.push('/')
+                alert("登录成功")
             });
           } else {
             console.log('error submit!!');

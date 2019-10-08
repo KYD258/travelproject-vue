@@ -5,7 +5,6 @@
       <span style="height:100px;width:200px;font-size: 40px; line-height:100px;text-align: center">千峰旅游</span>
     </div>
     <el-menu
-      :default-active="activeIndex2"
       class="el-menu-demo"
       mode="horizontal"
       @select="handleSelect"
@@ -19,6 +18,8 @@
       <el-menu-item index="5">消息中心</el-menu-item>
       <el-menu-item index="6">购物车</el-menu-item>
       <el-menu-item index="7" @click="toOrder()">订单管理</el-menu-item>
+      <el-menu-item index="6"><router-link to="/cart" >购物车</router-link></el-menu-item>
+      <el-menu-item index="7">订单管理</el-menu-item>
       <el-menu-item index="8">
         <div>
           <el-input placeholder="请输入内容" style="width: 500px">
@@ -74,12 +75,7 @@
               attrPrice:''
             }
           }
-      },
-    methods:{
-      toOrder:function () {
-        this.$router.push('/SysUserOrder')
       }
-    }
   }
 </script>
 <style>

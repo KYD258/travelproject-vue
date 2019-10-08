@@ -53,47 +53,25 @@
                   loginName:'',realName:'',sex:'',age:'',address:'',password:'',phone:'',
                   email:''
               },
-              code:'',
-              content:'发送验证码',
-              totalTime:60,
-              canClick:true
+              code:''
           }
       },
     methods:{
       getCode:function () {
-        if (!this.canClick) return  //改动的是这两行代码
-        this.canClick = false
-        this.content = this.totalTime + 's后重新发送'
-        let clock = window.setInterval(() => {
-          this.totalTime--
-          this.content = this.totalTime + 's后重新发送'
-          if (this.totalTime < 0) {
-            window.clearInterval(clock)
-            this.content = '重新发送验证码'
-            this.totalTime = 60
-            this.canClick = true  //这里重新开启
-          }
-        },1000)
         axios.get("/api/getCode/"+this.tbUser.email).then(res=>{
-          if(res.data.code==1){
-            this.$message({
-              message: '邮件发送成功，请输入验证码!',
-              type: 'success'
-            })
-          }
-        });
+            alert(this.tbUser.email)
+           if(res.data.code==1){
+               alert("邮件发送成功，请输入验证码!");
+           }
+        })
       },
       register:function () {
         axios.post("/api/userRegister",{"tbUser":this.tbUser,"code":this.code}).then(res=>{
+            alert(this.tbUser + this.code)
             if(res.data.code==1){
-//                alert("注册成功");
-              this.$message({
-                message: '注册成功',
-                type: 'success'
-              })
-                this.$router.push('/userLogin')
+                alert("注册成功");
             }else {
-              this.$message.error('注册失败')
+                alert("失败")
             }
         })
       }
