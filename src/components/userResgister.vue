@@ -29,11 +29,19 @@
       <el-form-item label="验证码">
         <el-input v-model="code"></el-input>
       </el-form-item>
-      <el-button round @click="getCode()">获取验证码</el-button>
-      <el-button type="primary" @click="register()" style="margin-left: 20px">注册</el-button>
+      <el-button round :plain="true" :class="{disabled: !this.canClick}" @click="getCode()">{{content}}</el-button>
+      <el-button type="primary" :plain="true" @click="register()" style="margin-left: 20px">注册</el-button>
     </el-form>
   </div>
 </template>
+<style>
+  .disabled{
+    background-color: #ddd;
+    border-color: #ddd;
+    color:#57a3f3;
+    cursor: not-allowed;
+  }
+</style>
 <script>
   import axios from 'axios'
   export default {
@@ -45,25 +53,47 @@
                   loginName:'',realName:'',sex:'',age:'',address:'',password:'',phone:'',
                   email:''
               },
-              code:''
+              code:'',
+              content:'发送验证码',
+              totalTime:60,
+              canClick:true
           }
       },
     methods:{
       getCode:function () {
+        if (!this.canClick) return  //改动的是这两行代码
+        this.canClick = false
+        this.content = this.totalTime + 's后重新发送'
+        let clock = window.setInterval(() => {
+          this.totalTime--
+          this.content = this.totalTime + 's后重新发送'
+          if (this.totalTime < 0) {
+            window.clearInterval(clock)
+            this.content = '重新发送验证码'
+            this.totalTime = 60
+            this.canClick = true  //这里重新开启
+          }
+        },1000)
         axios.get("/api/getCode/"+this.tbUser.email).then(res=>{
-            alert(this.tbUser.email)
-           if(res.data.code==1){
-               alert("邮件发送成功，请输入验证码!");
-           }
-        })
+          if(res.data.code==1){
+            this.$message({
+              message: '邮件发送成功，请输入验证码!',
+              type: 'success'
+            })
+          }
+        });
       },
       register:function () {
         axios.post("/api/userRegister",{"tbUser":this.tbUser,"code":this.code}).then(res=>{
-            alert(this.tbUser + this.code)
             if(res.data.code==1){
-                alert("注册成功");
+//                alert("注册成功");
+              this.$message({
+                message: '注册成功',
+                type: 'success'
+              })
+                this.$router.push('/userLogin')
             }else {
-                alert("失败")
+              this.$message.error('注册失败')
             }
         })
       }

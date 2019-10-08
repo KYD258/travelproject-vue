@@ -18,7 +18,7 @@
       <el-menu-item index="4">订酒店</el-menu-item>
       <el-menu-item index="5">消息中心</el-menu-item>
       <el-menu-item index="6">购物车</el-menu-item>
-      <el-menu-item index="7">订单管理</el-menu-item>
+      <el-menu-item index="7" @click="toOrder()">订单管理</el-menu-item>
       <el-menu-item index="8">
         <div>
           <el-input placeholder="请输入内容" style="width: 500px">
@@ -74,7 +74,12 @@
               attrPrice:''
             }
           }
+      },
+    methods:{
+      toOrder:function () {
+        this.$router.push('/SysUserOrder')
       }
+    }
   }
 </script>
 <style>
