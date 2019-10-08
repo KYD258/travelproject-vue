@@ -52,7 +52,8 @@
           if (valid) {
             alert('submit!');
             axios.post("/api/userLogin",this.user).then(res=>{
-                alert("登录成功")
+              this.$router.push('/')
+//                alert("登录成功")
             });
           } else {
             console.log('error submit!!');
