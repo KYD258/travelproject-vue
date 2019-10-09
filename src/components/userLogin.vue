@@ -51,7 +51,6 @@
           if (valid) {
             alert('submit!');
             axios.post("/api/userLogin",this.tbUser).then(res=>{
-                alert(res.data.code)
               if(res.data.code==1){
                 this.$router.push('/')
               }

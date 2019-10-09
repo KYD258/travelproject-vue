@@ -31,7 +31,6 @@
       login:function () {
         var url = "api/sysuserlogin";
         axios.post(url,this.user).then(res=>{
-          alert(res.data);
           if(res.data==1){
             this.$router.push("/show")
           }else {

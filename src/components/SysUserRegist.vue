@@ -38,7 +38,6 @@
       regist:function () {
         var url = "/api/sysuserRegist";
         axios.post(url,this.user).then(res=>{
-            alert(res.data)
           if(res.data==1){
             this.$router.push("/SysUserLogin")
           }else {
