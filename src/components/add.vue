@@ -1,7 +1,12 @@
 <template>
   <div>
     <h3>{{ msg }}</h3>
-
+    <!--<el-button type="success" round @click="upload($event)">点击上传图片</el-button>-->
+    <!--<input id="upload_document" type="file" style="display: none;" accept="application/pdf"/>-->
+    <label for="upfile" class="pTitleRight" @click="IDRecognition">
+      <span>点我上传图片</span>
+      <input ref="filElem" type="file" accept="image/*" id="upfile" name="upfile" style="display: none;" @change="uploadPic">
+    </label>
     <form>
       <el-input placeholder="请输入景点名称" v-model="sysattr.attrName" size="large" style="width: 450px">
         <template slot="prepend" >景点名称</template>
@@ -38,11 +43,13 @@
           attrAddress:'',
           attrInfo:'',
           attrPrice:''
-        }
+        },
+        file:''
       }
     },
     methods: {
       add:function () {
+          console.log(this.sysattr)
         var url="api/attr/save"
         axios.post(url,this.sysattr).then(res=>{
           if(res.data!=null){
@@ -52,8 +59,22 @@
           }
 
         })
+      },
+      IDRecognition:function () {},
+      uploadPic:function (event) {
+          alert("...")
+        this.file=event.target.files[0];
+        alert(this.file);
+        let formData = new FormData();
+        formData.append("file",this.file)
+        axios.post("/api/attr/getPath",formData).then(res=>{
+          if(res.data!=null){
+              this.sysattr.attrPic=res.data;
+          }else {
+              alert("上传失败")
+          }
+        })
       }
-
     }
   }
 </script>
