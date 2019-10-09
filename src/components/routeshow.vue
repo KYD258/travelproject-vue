@@ -14,7 +14,7 @@
       </el-table-column>
       <el-table-column align="center"
                        prop="routeName"
-                       label="名称"
+                       label="线路名称"
                        width="150">
       </el-table-column>
       <el-table-column align="center"
@@ -31,12 +31,12 @@
         width="140"  >
       </el-table-column>
       <el-table-column align="center"
-                       prop="routeInfo1"
-                       label="卖点">
+                       prop="info1"
+                       label="卖点1">
       </el-table-column>
       <el-table-column align="center"
-                       prop="routeInfo2"
-                       label="卖点">
+                       prop="info2"
+                       label="卖点2">
       </el-table-column>
       <el-table-column align="center"
                        prop="routeTime"
@@ -44,17 +44,17 @@
       </el-table-column>
       <el-table-column align="center"
                        prop="routePrice"
-                       label="价格"
+                       label="套餐价格"
                        width="100">
       </el-table-column>
       <el-table-column align="center"
                        prop="routeNum"
-                       label="价格"
+                       label="拼团人数"
                        width="100">
       </el-table-column>
       <el-table-column align="center"
                        prop="routeDay"
-                       label="价格"
+                       label="游玩时长"
                        width="100">
       </el-table-column>
       <el-table-column align="center"

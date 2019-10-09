@@ -12,13 +12,12 @@
       text-color="#fff"
       active-text-color="black">
       <el-menu-item index="1"><router-link to="/">首页</router-link></el-menu-item>
-      <el-menu-item index="2">旅游攻略</el-menu-item>
-      <el-menu-item index="3">机票</el-menu-item>
-      <el-menu-item index="4">订酒店</el-menu-item>
-      <el-menu-item index="5">消息中心</el-menu-item>
-      <el-menu-item index="6"><router-link to="/cart" >购物车</router-link></el-menu-item>
-      <el-menu-item index="7">订单管理</el-menu-item>
-      <el-menu-item index="8">
+      <el-menu-item index="2">机票</el-menu-item>
+      <el-menu-item index="3">订酒店</el-menu-item>
+      <el-menu-item index="4">消息中心</el-menu-item>
+      <el-menu-item index="5"><router-link to="/cart" >购物车</router-link></el-menu-item>
+      <el-menu-item index="6">订单管理</el-menu-item>
+      <el-menu-item index="7">
         <div>
           <el-input placeholder="请输入内容" style="width: 500px">
             <template slot="prepend" >查询景点</template>
@@ -26,13 +25,13 @@
           </el-input>
         </div>
       </el-menu-item>
-      <el-submenu index="9">
+      <el-submenu index="8">
         <template slot="title">登陆</template>
-        <el-menu-item index="9-1"><router-link to="/userLogin" >用户登录</router-link></el-menu-item>
-        <el-menu-item index="9-2"><router-link to="/SysUserLogin" >管理员登录</router-link></el-menu-item>
+        <el-menu-item index="8-1"><router-link to="/userLogin" >用户登录</router-link></el-menu-item>
+        <el-menu-item index="8-2"><router-link to="/SysUserLogin" >管理员登录</router-link></el-menu-item>
       </el-submenu>
-      <el-menu-item index="10"><router-link to="/userResgister" >注册</router-link></el-menu-item>
-      <el-menu-item index="11">注销</el-menu-item>
+      <el-menu-item index="9"><router-link to="/userResgister" >注册</router-link></el-menu-item>
+      <el-menu-item index="10">注销</el-menu-item>
     </el-menu>
     <br>
     <hr style="background-color:#2577e1;height:0.5px;width: 100%">
@@ -45,7 +44,7 @@
     </template>
 
     <el-container>
-      <el-header>精选套餐</el-header>
+      <el-header><h1>精选套餐</h1></el-header>
       <el-container>
         <el-aside width="200px">用户评价</el-aside>
         <el-main>
@@ -55,58 +54,50 @@
                     style="width: 100%">
             <el-table-column align="center"
                              prop="routeName"
-                             label="名称"
+                             label="线路名称"
                              width="150">
             </el-table-column>
             <el-table-column align="center"
                              label="图片"
                              width="180">
               <template slot-scope="sysroute">
-                <img :src="sysroute.row.routePic" width="100" height="100" class="routePic"/>
+                <router-link :to="{name:'detail',params:{routeId:sysroute.row.routeId}}"><img :src="sysroute.row.routePic" width="100" height="100" class="routePic"/></router-link>
               </template>
             </el-table-column>
             <el-table-column align="center"
-                             prop="routeInfo1"
+                             prop="info1"
                              label="卖点">
             </el-table-column>
             <el-table-column align="center"
-                             prop="routeInfo2"
+                             prop="info2"
                              label="卖点">
             </el-table-column>
             <el-table-column align="center"
                              prop="routeTime"
-                             label="时间">
+                             label="出发时间">
             </el-table-column>
             <el-table-column align="center"
                              prop="routePrice"
-                             label="价格"
+                             label="套餐价格"
                              width="100">
             </el-table-column>
             <el-table-column align="center"
                              prop="routeNum"
-                             label="人数"
+                             label="拼团人数"
                              width="100">
             </el-table-column>
             <el-table-column align="center"
                              prop="routeDay"
-                             label="时间"
+                             label="游玩时长"
                              width="100">
             </el-table-column>
           </el-table>
-
-          <el-pagination
-            background
-            layout="prev, next"
-            :page-size="this.params.size"
-            v-on:current-change="changePage1"
-            :total="total" :current-page="this.params.page">
-          </el-pagination>
         </el-main>
       </el-container>
     </el-container>
 
     <el-container>
-      <el-header>景点推荐</el-header>
+      <el-header><h1>景点推荐</h1></el-header>
       <el-container>
         <el-aside width="200px">用户评价</el-aside>
         <el-main>
@@ -123,7 +114,7 @@
                              label="图片"
                              width="180">
               <template slot-scope="sysattr">
-                <img :src="sysattr.row.attrPic" width="100" height="100" class="attrPic"/>
+                <router-link :to="{name:'detail',params:{attrId:sysattr.row.attrId}}"><img :src="sysattr.row.attrPic" width="100" height="100" class="attrPic"/></router-link>
               </template>
             </el-table-column>
             <el-table-column align="center"
@@ -134,7 +125,7 @@
 
           <el-pagination
             background
-            layout="prev,  next"
+            layout="prev, next"
             :page-size="this.params.size"
             v-on:current-change="changePage"
             :total="total" :current-page="this.params.page">
@@ -160,7 +151,7 @@
     },
     mounted(){
       this.query(),
-        this.query1()
+        this.find()
     },
     methods:{
       query:function () {
@@ -175,16 +166,11 @@
         this.query();
       },
 
-      query1:function () {
+      find:function () {
         var url ="api/route/selectAll/"+this.params.page+"/"+this.params.size
         axios.get(url).then(res=>{
           this.sysroute=res.data.list;
-          this.total=res.data.total;
         })
-      },
-      changePage1:function (page) {
-        this.params.page=page;
-        this.query1();
       }
     }
   }
@@ -196,14 +182,15 @@
     white-space:nowrap;
   }
   .el-header{
-    background-color: #B3C0D1;
+    background-color: #2577e1;
     color: #333;
+
     text-align: center;
-    line-height: 60px;
+    line-height: 30px;
   }
 
   .el-aside {
-    background-color: #D3DCE6;
+    background-color: #0F95FF;
     color: #333;
     text-align: center;
     line-height: 200px;
@@ -236,9 +223,7 @@
     background-color: #d3dce6;
   }
   a{
-
     text-decoration: none;
-
   }
 </style>
 

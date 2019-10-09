@@ -12,6 +12,7 @@ import add from '@/components/add'
 import update from '@/components/update'
 import routeshow from '@/components/routeshow'
 import cart from '@/components/cart'
+import detail from '@/components/detail'
 Vue.use(Router)
 
 export default new Router({
@@ -27,6 +28,7 @@ export default new Router({
     {path:'/add',name:'add',component:add},
     {path:'/update/:attrId',name:'update',component:update},
     {path:'/routeshow',name:'routeshow',component:routeshow},
-    {path:'/cart',name:'cart',component:cart}
+    {path:'/cart',name:'cart',component:cart},
+    {path:'/detail',name:'detail',component:detail}
   ]
 })
