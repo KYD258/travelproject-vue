@@ -1,16 +1,16 @@
 <template>
   <div>
     <h1>{{msg}}</h1>
-    <el-form :model="user" status-icon :rules="rules" ref="user" label-width="100px" class="demo-ruleForm">
+    <el-form :model="tbUser" status-icon :rules="rules" ref="tbUser" label-width="100px" class="demo-ruleForm">
       <el-form-item label="用户名" prop="userName">
-        <el-input type="userName" v-model="user.userName" autocomplete="off"></el-input>
+        <el-input type="userName" v-model="tbUser.loginName" autocomplete="off"></el-input>
       </el-form-item>
       <el-form-item label="密码" prop="password">
-        <el-input type="password" v-model="user.password" autocomplete="off"></el-input>
+        <el-input type="password" v-model="tbUser.password" autocomplete="off"></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="submitForm('user')">登陆</el-button>
-        <el-button @click="resetForm('user')">重置</el-button>
+        <el-button type="primary" @click="submitForm('tbUser')">登陆</el-button>
+        <el-button @click="resetForm('tbUser')">重置</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -35,8 +35,8 @@
         };
           return{
               msg:'用户登录页面',
-              user:{
-                  userName:'',
+              tbUser:{
+                  loginName:'',
                   password:""
               },
             rules:{
@@ -50,8 +50,11 @@
         this.$refs[formName].validate((valid) => {
           if (valid) {
             alert('submit!');
-            axios.post("/api/userLogin",this.user).then(res=>{
-              this.$router.push('/')
+            axios.post("/api/userLogin",this.tbUser).then(res=>{
+                alert(res.data.code)
+              if(res.data.code==1){
+                this.$router.push('/')
+              }
 //                alert("登录成功")
             });
           } else {
