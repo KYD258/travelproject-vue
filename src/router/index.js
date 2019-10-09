@@ -11,6 +11,7 @@ import SysOrderUpdate from '@/components/SysOrderUpdate'
 import add from '@/components/add'
 import update from '@/components/update'
 import routeshow from '@/components/routeshow'
+import cart from '@/components/cart'
 Vue.use(Router)
 
 export default new Router({
@@ -25,6 +26,7 @@ export default new Router({
     {path:'/SysOrderUpdate/:orderId',name:'SysOrderUpdate',component:SysOrderUpdate},
     {path:'/add',name:'add',component:add},
     {path:'/update/:attrId',name:'update',component:update},
-    {path:'/routeshow',name:'routeshow',component:routeshow}
+    {path:'/routeshow',name:'routeshow',component:routeshow},
+    {path:'/cart',name:'cart',component:cart}
   ]
 })
