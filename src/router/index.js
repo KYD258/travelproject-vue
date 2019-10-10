@@ -13,6 +13,7 @@ import update from '@/components/update'
 import routeshow from '@/components/routeshow'
 import cart from '@/components/cart'
 import detail from '@/components/detail'
+import applyText from '@/components/applyText'
 Vue.use(Router)
 
 export default new Router({
@@ -29,6 +30,7 @@ export default new Router({
     {path:'/update/:attrId',name:'update',component:update},
     {path:'/routeshow',name:'routeshow',component:routeshow},
     {path:'/cart',name:'cart',component:cart},
-    {path:'/detail',name:'detail',component:detail}
+    {path:'/detail',name:'detail',component:detail},
+    {path:'/applyText',name:'applyText',component:applyText}
   ]
 })

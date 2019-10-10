@@ -1,18 +1,22 @@
 <template>
   <div>
+    <el-page-header @back="goBack" content="登录页面">
+    </el-page-header>
+  <div style="height: 400px;width: 300px;padding-left: 550px">
     <h1>{{msg}}</h1>
-    <el-form :model="tbUser" status-icon :rules="rules" ref="tbUser" label-width="100px" class="demo-ruleForm">
+    <el-form :model="tbUser" ref="tbUser">
       <el-form-item label="用户名" prop="userName">
-        <el-input type="userName" v-model="tbUser.loginName" autocomplete="off"></el-input>
+        <el-input type="userName" v-model="tbUser.loginName"  placeholder="请输入用户名"></el-input>
       </el-form-item>
       <el-form-item label="密码" prop="password">
-        <el-input type="password" v-model="tbUser.password" autocomplete="off"></el-input>
+        <el-input type="password" v-model="tbUser.password" placeholder="请输入密码"></el-input>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="submitForm('tbUser')">登陆</el-button>
-        <el-button @click="resetForm('tbUser')">重置</el-button>
+        <el-button type="success" @click="resetForm('tbUser')">重置</el-button>
       </el-form-item>
     </el-form>
+  </div>
   </div>
 </template>
 <script>
@@ -34,15 +38,11 @@
           }
         };
           return{
-              msg:'用户登录页面',
+              msg:'用户登录',
               tbUser:{
                   loginName:'',
                   password:""
               },
-            rules:{
-              userName: [{ validator: validateUserName, trigger: 'blur' }],
-              password: [{ validator: validatePassword, trigger: 'blur' }]
-            }
           }
       },
     methods:{
@@ -61,6 +61,9 @@
             return false;
           }
         });
+      },
+      goBack() {
+        this.$router.push("/");
       },
       resetForm(formName) {
         this.$refs[formName].resetFields();

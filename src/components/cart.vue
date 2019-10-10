@@ -1,113 +1,188 @@
 <template>
   <div>
-    <div id="a">
-      <img width="200px" height="100px" src="http://pxyx6d1pg.bkt.clouddn.com/222.jpg"/>
-      <span style="height:100px;width:200px;font-size: 40px; line-height:100px;text-align: center">千峰旅游</span>
+    <div>
+      <el-header>
+        <!--导航栏-->
+        <el-row>
+          <el-col :span="10">
+            <div class="grid-content bg-purple" style="color: black;font-size: 14px;line-height: 30px">
+              <el-dropdown>
+          <span class="el-dropdown-link">
+            <a class="el-icon-location">地址</a><i class="el-icon-arrow-down el-icon--right"></i>
+          </span>
+                <el-dropdown-menu slot="dropdown">
+                  <el-dropdown-item >北京</el-dropdown-item>
+                  <el-dropdown-item>上海</el-dropdown-item>
+                  <el-dropdown-item>广州</el-dropdown-item>
+                  <el-dropdown-item>深圳</el-dropdown-item>
+                  <el-dropdown-item>杭州</el-dropdown-item>
+                </el-dropdown-menu>
+              </el-dropdown>
+              <a>..</a>
+              <router-link type="info" :to="{name:'userLogin'}" style="color:black"><a>{{msg}}</a></router-link>
+              <a>..</a>
+              <router-link type="info" :to="{name:'SysUserLogin'}" style="color:black"><a>管理员登录</a></router-link>
+              <a>..</a>
+              <router-link type="info" :to="{name:'userResgister'}" style="color:black"><a>免费注册</a></router-link>
+              <a>..</a>
+
+            </div>
+          </el-col>
+          <el-col :span="14">
+            <div class="grid-content bg-purple-light" style="color: black;line-height: 30px;font-size: 14px">
+              <router-link type="info" :to="{name:'userOrder'}" style="color: black"><a>我的订单</a></router-link>
+              <el-dropdown style="margin-left: 10px">
+          <span class="el-dropdown-link">
+            <a>个人中心</a><i class="el-icon-arrow-down el-icon--left"></i>
+          </span>
+                <el-dropdown-menu slot="dropdown">
+                  <el-dropdown-item><router-link :to="{name:'userDetial'}">完善信息</router-link></el-dropdown-item>
+                </el-dropdown-menu>
+              </el-dropdown>
+              <el-dropdown>
+          <span class="el-dropdown-link">
+            <a>企业采购</a><i class="el-icon-arrow-down el-icon--left"></i>
+          </span>
+                <el-dropdown-menu slot="dropdown">
+                  <el-dropdown-item>1</el-dropdown-item>
+                  <el-dropdown-item>2</el-dropdown-item>
+                  <el-dropdown-item>3</el-dropdown-item>
+                  <el-dropdown-item>4</el-dropdown-item>
+                  <el-dropdown-item>5</el-dropdown-item>
+                </el-dropdown-menu>
+              </el-dropdown>
+              <el-dropdown>
+          <span class="el-dropdown-link">
+            <a>客户服务</a><i class="el-icon-arrow-down el-icon--left"></i>
+          </span>
+                <el-dropdown-menu slot="dropdown">
+                  <el-dropdown-item>1</el-dropdown-item>
+                  <el-dropdown-item>2</el-dropdown-item>
+                  <el-dropdown-item>3</el-dropdown-item>
+                  <el-dropdown-item>4</el-dropdown-item>
+                  <el-dropdown-item>5</el-dropdown-item>
+                </el-dropdown-menu>
+              </el-dropdown>
+              <el-dropdown>
+          <span class="el-dropdown-link">
+            <a>网站导航</a><i class="el-icon-arrow-down el-icon--left"></i>
+          </span>
+                <el-dropdown-menu slot="dropdown">
+                  <el-dropdown-item>1</el-dropdown-item>
+                  <el-dropdown-item>2</el-dropdown-item>
+                  <el-dropdown-item>3</el-dropdown-item>
+                  <el-dropdown-item>4</el-dropdown-item>
+                  <el-dropdown-item>5</el-dropdown-item>
+                </el-dropdown-menu>
+              </el-dropdown>
+            </div>
+          </el-col>
+        </el-row>
+      </el-header>
+      <el-row :gutter="10">
+        <el-col :span="6">
+          <!--log展示-->
+          <div class="grid-content" style="float:left;width:205px;height: 70px;line-height: 70px;margin-top:10px; ">
+            <el-image src="../static/timg2.jpg" style="height: 70px;width:140px;border-radius: 3px"></el-image>
+          </div>
+        </el-col>
+        <el-col :span="12">
+          <div class="grid-content" style="height: 80px;width:100%;">
+            <el-input ref="searchName" type="text" style="width: 80%;margin: auto;margin-top: 20px" placeholder="请输入内容"></el-input>
+            <el-button type="danger" icon="el-icon-search" plain @click="search()">查询</el-button>
+          </div>
+        </el-col>
+        <el-col :span="6">
+          <div class="grid-content" style="height: 80px;line-height: 80px">
+            <el-badge :value="100" :max="10" class="item">
+              <el-tooltip content="点我" placement="bottom" effect="light">
+                <el-button size="" plain style="width: 180px;height: 60px">
+                  <i style="font-size: 16px; font-weight: bold;color:red"  class="el-icon-shopping-cart-full "></i>
+                  <router-link :to="{name:'cart'}" style="font-size: 16px"><a>您心仪的线路</a></router-link>
+                </el-button>
+              </el-tooltip>
+            </el-badge>
+          </div>
+        </el-col>
+      </el-row>
     </div>
-    <el-menu
-      class="el-menu-demo"
-      mode="horizontal"
-      @select="handleSelect"
-      background-color="#2577e1"
-      text-color="#fff"
-      active-text-color="black">
-      <el-menu-item index="1"><router-link to="/">首页</router-link></el-menu-item>
-      <el-menu-item index="2">机票</el-menu-item>
-      <el-menu-item index="3">订酒店</el-menu-item>
-      <el-menu-item index="4">消息中心</el-menu-item>
-      <el-menu-item index="5"><router-link to="/cart" >购物车</router-link></el-menu-item>
-      <el-menu-item index="6">订单管理</el-menu-item>
-      <el-menu-item index="7">
-        <div>
-          <el-input placeholder="请输入内容" style="width: 500px">
-            <template slot="prepend" >查询景点</template>
-            <el-button slot="append" icon="el-icon-search"></el-button>
-          </el-input>
-        </div>
-      </el-menu-item>
-      <el-submenu index="8">
-        <template slot="title">登陆</template>
-        <el-menu-item index="8-1"><router-link to="/userLogin" >用户登录</router-link></el-menu-item>
-        <el-menu-item index="8-2"><router-link to="/SysUserLogin" >管理员登录</router-link></el-menu-item>
-      </el-submenu>
-      <el-menu-item index="9"><router-link to="/userResgister" >注册</router-link></el-menu-item>
-      <el-menu-item index="10">注销</el-menu-item>
-    </el-menu>
-
-    <hr>
-
-
-
-    <el-table align="center"
+    <div style="padding-top: 20px"></div>
+          <div style="padding-left: 120px;margin-bottom: 20px">
+            <el-table
               :data="sysRoute"
-              border
+              stripe
               style="width: 100%">
-      <el-table-column label="全选"  width="100" style="color:red"  :render-header="renderHeader">
-      <template slot-scope="sysRoute">
-      <el-checkbox  v-model="sysRoute.row.checked"></el-checkbox>
-      </template>
-      </el-table-column>
-      <el-table-column align="center"
-                       prop="routeName"
-                       label="名称"
-                       width="150">
-      </el-table-column>
+              <el-table-column
+                prop="routeName"
+                label="线路名"
+                width="180">
+              </el-table-column>
+              <el-table-column
+                prop="routeArea"
+                label="线路所属区域"
+                width="180">
+              </el-table-column>
+              <el-table-column
+                prop="routePrice"
+                label="价格"
+                width="180">
+              </el-table-column>
+              <el-table-column
+                prop="routeNum"
+                label="线路人数"
+                width="180">
+              </el-table-column>
+              <el-table-column
+                prop="routeDay"
+                label="线路共计天数"
+                width="180">
+              </el-table-column>
+              <el-table-column
+                label="操作"
+                width="220">
+                <template slot-scope="sysRoute">
+                <el-row>
+                  <el-button type="success" round  @click="pay(sysRoute.row.routeId,sysRoute.row.routeName,sysRoute.row.routePrice)">支付</el-button>
+                  <el-button type="danger" round  @click="del(sysRoute.row.routeId)">删除</el-button>
+                </el-row>
+                </template>
+              </el-table-column>
+            </el-table>
+          </div>
+        <el-main>
+          <div style="height: 60px;width: 1000px;float: right;margin-bottom: 20px">
+            <div style="float: right;margin-right: 80px;height: 60px">
+              <el-button type="success" style="width: 120px" @click="payAll()">全部支付</el-button>
+            </div>
+          </div>
 
-      <el-table-column
-        align="center"
-        prop="routeArea"
-        label="地点"
-        width="140"  >
-      </el-table-column>
-      <el-table-column
-        align="center"
-        prop="routeTime"
-        label="时间"
-        width="140"  >
-      </el-table-column>
+        </el-main>
 
-      <el-table-column align="center"
-                       prop="routePrice"
-                       label="价格"
-                       width="100">
-      </el-table-column>
+        <el-footer style="height: 120px;background-color: rgba(96, 225, 27, 0.1)">
+          <!--bottom-->
+          <el-row>
+            <el-col :span="24"  class="bg-purple">
+              <div style="height: 120px;line-height: 20px;font-size: 13px;text-align: center">
+                <ul>
+                  <li>
+                    <a href="">© lv.com 京ICP证110507号 京ICP备10046444号 京公网安备11010802020134号 京网文[2017]1530-131号</a>
+                  </li><br>
+                  <li>
+                    <a href="">（京）旅平台备字（2018）第00005号 互联网药品信息服务资格证 (京) -非经营性-2014-0090 营业执照 旅游公告</a>
+                  </li><br>
+                  <li>
+                    <a href="">增值电信业务许可证  网络食品经营备案（京）【2018】WLSPJYBAHF-12   食品经营许可证</a>
+                  </li><br>
+                  <li>
+                    <a href="">违法和不良信息举报电话：185-0130-1238 知识产权侵权投诉 本网站所列数据，除特殊说明，所有数据均出自我司，版权所有，盗版必究</a>
+                  </li>
+                </ul>
+              </div>
+            </el-col>
+          </el-row>
 
-
-
-      <el-table-column
-        align="center"
-        prop="routeNum"
-        label="拼团人数"
-        width="150"  >
-        <!--<el-button type="primary" size="mini"icon="el-icon-arrow-left" >☜</el-button>-->
-        <!--<el-button type="primary" size="mini">☛<i class="el-icon-arrow-right el-icon&#45;&#45;right"></i></el-button>-->
-      </el-table-column>
-      <el-table-column
-        align="center"
-        prop="routeDay"
-        label="天数"
-        width="100"  >
-      </el-table-column>
-      <el-table-column align="center"
-                       label="操作"
-                       width="300">
-        <template slot-scope="sysRoute">
-          <!--<el-button type="danger" round  @click="del(sysRoute.row.routeId)">删除</el-button>-->
-          <!--<el-button type="warning" icon="el-icon-edit" circle @click="update(route.row.routeId)"></el-button>-->
-          <el-button type="success" round  @click="pay()">支付</el-button>
-        </template>
-
-      </el-table-column>
-
-      <div>
-
-
-
+        </el-footer>
       </div>
-    </el-table>
-
-  </div>
-
 </template>
 <script>
   import axios from 'axios'
@@ -116,67 +191,126 @@
     components: {ElImage},
     data(){
       return {
+          msg:'',
         sysOrder:[],
-        sysRoute: []
-//        total: 0,
-//        params: {
-//          size: 5,
-//          page: 1
-
+        sysRoute: [],
+        checked: true
       }
     },
     mounted(){
       this.query()
     },
     methods:{
-//      del:function(routeId) {
-//        var url="api/sos/findByUserId"
-//        axios.post(url,{routeId:routeId}).then(res=> {
-//          if (res.data!=null) {
-//            alert(res.data)
-//            this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
-//              confirmButtonText: '确定',
-//              cancelButtonText: '取消',
-//              type: 'warning'
-//            }).then(() => {
-//              var url1="api/sos/deleteOrder"
-//              var orderId=res.data
-//              alert(orderId)
-//              axios.post(url1,{orderId:orderId}).then(res1=> {
-//                  alert(res1.data)
-//                if (res1.data!=null) {
-//                  this.query()
-//                }
-//              })
-//              this.$message({
-//                type: 'success',
-//                message: '删除成功!'
-//              });
-//            }).catch(() => {
-//              this.$message({
-//                type: 'info',
-//                message: '已取消删除'
-//              });
-//            });
-//          }
-//        })
-//
-//      },
       query:function () {
         var url ="api/cartSelectAll"
         axios.get(url).then(res=>{
-            //alert(res.data)
-         // console.log(res.data)
           this.sysRoute=res.data;
+        })
+        axios.get("api/getMsg").then(res=>{
+            this.msg=res.data
+
         })
 
      },
-      pay:function () {
-        alert("支付成功")
+      pay:function (routeId,routeName,routePrice) {
+        alert(routePrice+""+routeName)
+        axios.post("api/alipay/pay",{routeId:routeId,routeName:routeName,routePrice:routePrice}).then(res=>{
+          this.$router.replace({
+            path: '/applyText',
+            query: {html: res.data}
+          })
+        })
+      },
+      payAll:function () {
+        axios.post("api/alipay/payAll").then(res=>{
+          this.$router.replace({
+            path: '/applyText',
+            query: {html: res.data}
+          })
+        })
+      },
+      del:function (routeId) {
+        axios.post("api/alipay/del",{routeId:routeId}).then(res=>{
+            alert(res.data)
+          this.query()
+        })
       }
 
     }
   }
 </script>
+<style>
+  #a{
+    white-space:nowrap;
+  }
+  #h1{
+    background-color: rgba(96, 225, 27, 0.1);
+    color: #333;
+
+    text-align: center;
+    line-height: 30px;
+  }
+
+  .el-aside {
+    background-color: rgba(210, 225, 219, 0);
+    color: #333;
+    text-align: center;
+    line-height: 200px;
+    overflow: hidden;
+  }
+
+  .el-main {
+    background-color: rgba(233, 238, 243, 0);
+    color: #333;
+    text-align: center;
+    line-height: 0px;
+    overflow: hidden;
+    line-height: inherit;
+  }
+
+  body > .el-container {
+    margin-bottom: 40px;
+  }
+
+  .el-carousel__item h3 {
+    color: rgba(71, 86, 105, 0);
+    font-size: 14px;
+    opacity: 0.75;
+    line-height: 200px;
+    margin: 0;
+  }
+
+  .el-carousel__item:nth-child(2n) {
+    background-color: rgba(153, 169, 191, 0);
+  }
+
+  .el-carousel__item:nth-child(2n+1) {
+    background-color: rgba(211, 220, 230, 0);
+  }
+  a{
+    text-decoration: none;
+  }
+</style>
+
+<style scoped>
+  h1, h2 {
+    font-weight: normal;
+  }
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  li {
+    display: inline-block;
+    margin: 0 10px;
+  }
+  a:link {
+    color: #000000;
+    text-decoration-line: none;
+  }
+  a:hover{
+    color: red;
+  }
+</style>
 
 

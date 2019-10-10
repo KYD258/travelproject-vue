@@ -1,5 +1,8 @@
 <template>
-  <div style="margin: auto;width: 650px;">
+  <div>
+    <el-page-header @back="goBack" content="注册页面">
+    </el-page-header>
+  <div style="margin: auto;width: 550px;">
     <h1>{{msg}}</h1>
     <el-form :label-position="labelPosition" label-width="80px" :model="tbUser">
       <el-form-item label="用户名">
@@ -32,6 +35,7 @@
       <el-button round :plain="true" :class="{disabled: !this.canClick}" @click="getCode()">{{content}}</el-button>
       <el-button type="primary" :plain="true" @click="register()" style="margin-left: 20px">注册</el-button>
     </el-form>
+  </div>
   </div>
 </template>
 <style>
@@ -82,6 +86,9 @@
              })
            }
         })
+      },
+      goBack() {
+        this.$router.push("/");
       },
       register:function () {
         axios.post("/api/userRegister",{"tbUser":this.tbUser,"code":this.code}).then(res=>{

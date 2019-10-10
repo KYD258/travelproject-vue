@@ -1,157 +1,203 @@
 <template>
   <div>
-    <div id="a">
-      <img width="200px" height="100px" src="http://pxyx6d1pg.bkt.clouddn.com/222.jpg"/>
-      <span style="height:100px;width:200px;font-size: 40px; line-height:100px;text-align: center">千峰旅游</span>
-    </div>
-    <el-menu
-      class="el-menu-demo"
-      mode="horizontal"
-      @select="handleSelect"
-      background-color="#2577e1"
-      text-color="#fff"
-      active-text-color="black">
-      <el-menu-item index="1"><router-link to="/">首页</router-link></el-menu-item>
-      <el-menu-item index="2">机票</el-menu-item>
-      <el-menu-item index="3">订酒店</el-menu-item>
-      <el-menu-item index="4">消息中心</el-menu-item>
-      <el-menu-item index="5"><router-link to="/cart" >购物车</router-link></el-menu-item>
-      <el-menu-item index="6">订单管理</el-menu-item>
-      <el-menu-item index="7">
-        <div>
-          <el-input placeholder="请输入内容" style="width: 500px">
-            <template slot="prepend" >查询景点</template>
-            <el-button slot="append" icon="el-icon-search"></el-button>
-          </el-input>
+    <el-header>
+      <!--导航栏-->
+      <el-row>
+        <el-col :span="10">
+          <div class="grid-content bg-purple" style="color: black;font-size: 14px;line-height: 30px">
+            <el-dropdown>
+          <span class="el-dropdown-link">
+            <a class="el-icon-location">地址</a><i class="el-icon-arrow-down el-icon--right"></i>
+          </span>
+              <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item >北京</el-dropdown-item>
+                <el-dropdown-item>上海</el-dropdown-item>
+                <el-dropdown-item>广州</el-dropdown-item>
+                <el-dropdown-item>深圳</el-dropdown-item>
+                <el-dropdown-item>杭州</el-dropdown-item>
+              </el-dropdown-menu>
+            </el-dropdown>
+            <a>..</a>
+            <router-link type="info" :to="{name:'userLogin'}" style="color:black"><a>{{msg}}</a></router-link>
+            <a>..</a>
+            <router-link type="info" :to="{name:'SysUserLogin'}" style="color:black"><a>管理员登录</a></router-link>
+            <a>..</a>
+            <router-link type="info" :to="{name:'userResgister'}" style="color:black"><a>免费注册</a></router-link>
+            <a>..</a>
+          </div>
+        </el-col>
+        <el-col :span="14">
+          <div class="grid-content bg-purple-light" style="color: black;line-height: 30px;font-size: 14px">
+            <router-link type="info" :to="{name:'userOrder'}" style="color: black"><a>我的订单</a></router-link>
+            <el-dropdown style="margin-left: 10px">
+          <span class="el-dropdown-link">
+            <a>个人中心</a><i class="el-icon-arrow-down el-icon--left"></i>
+          </span>
+              <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item><router-link :to="{name:'userIndex'}">不要点我！</router-link></el-dropdown-item>
+                <!--<el-dropdown-item>修改信息</el-dropdown-item>-->
+                <!--<el-dropdown-item>3</el-dropdown-item>-->
+                <!--<el-dropdown-item>4</el-dropdown-item>-->
+                <!--<el-dropdown-item>5</el-dropdown-item>-->
+              </el-dropdown-menu>
+            </el-dropdown>
+            <el-dropdown>
+          <span class="el-dropdown-link">
+            <a>企业采购</a><i class="el-icon-arrow-down el-icon--left"></i>
+          </span>
+              <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item>1</el-dropdown-item>
+                <el-dropdown-item>2</el-dropdown-item>
+                <el-dropdown-item>3</el-dropdown-item>
+                <el-dropdown-item>4</el-dropdown-item>
+                <el-dropdown-item>5</el-dropdown-item>
+              </el-dropdown-menu>
+            </el-dropdown>
+            <el-dropdown>
+          <span class="el-dropdown-link">
+            <a>客户服务</a><i class="el-icon-arrow-down el-icon--left"></i>
+          </span>
+              <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item>1</el-dropdown-item>
+                <el-dropdown-item>2</el-dropdown-item>
+                <el-dropdown-item>3</el-dropdown-item>
+                <el-dropdown-item>4</el-dropdown-item>
+                <el-dropdown-item>5</el-dropdown-item>
+              </el-dropdown-menu>
+            </el-dropdown>
+            <el-dropdown>
+          <span class="el-dropdown-link">
+            <a>网站导航</a><i class="el-icon-arrow-down el-icon--left"></i>
+          </span>
+              <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item>1</el-dropdown-item>
+                <el-dropdown-item>2</el-dropdown-item>
+                <el-dropdown-item>3</el-dropdown-item>
+                <el-dropdown-item>4</el-dropdown-item>
+                <el-dropdown-item>5</el-dropdown-item>
+              </el-dropdown-menu>
+            </el-dropdown>
+          </div>
+        </el-col>
+      </el-row>
+    </el-header>
+    <el-row :gutter="10">
+      <el-col :span="6">
+        <!--log展示-->
+      <div class="grid-content" style="float:left;width:205px;height: 70px;line-height: 70px;margin-top:10px; ">
+        <el-image src="../static/timg2.jpg" style="height: 70px;width:140px;border-radius: 3px"></el-image>
+      </div>
+    </el-col>
+      <el-col :span="12">
+        <div class="grid-content" style="height: 80px;width:100%;">
+          <el-input ref="searchName" type="text" style="width: 80%;margin: auto;margin-top: 20px" placeholder="请输入内容"></el-input>
+          <el-button type="danger" icon="el-icon-search" plain @click="search()">查询</el-button>
         </div>
-      </el-menu-item>
-      <el-submenu index="8">
-        <template slot="title">登陆</template>
-        <el-menu-item index="8-1"><router-link to="/userLogin" >用户登录</router-link></el-menu-item>
-        <el-menu-item index="8-2"><router-link to="/SysUserLogin" >管理员登录</router-link></el-menu-item>
-      </el-submenu>
-      <el-menu-item index="9"><router-link to="/userResgister" >注册</router-link></el-menu-item>
-      <el-menu-item index="10">注销</el-menu-item>
-    </el-menu>
-    <br>
-    <hr style="background-color:#2577e1;height:0.5px;width: 100%">
-    <template>
-      <el-carousel :interval="4000" type="card" height="400px">
-        <el-carousel-item v-for="sysattr in sysattr" :key="sysattr">
-          <router-link :to="{name:'detail',params:{attrId:sysattr.attrId}}"><img :src="sysattr.attrPic" style="width:751px;height:400px  "></router-link>
-        </el-carousel-item>
-      </el-carousel>
-    </template>
+      </el-col>
+      <el-col :span="6">
+        <div class="grid-content" style="height: 80px;line-height: 80px">
+          <el-badge :value="100" :max="10" class="item">
+            <el-tooltip content="点我" placement="bottom" effect="light">
+              <el-button size="" plain style="width: 180px;height: 60px">
+                <i style="font-size: 16px; font-weight: bold;color:red"  class="el-icon-shopping-cart-full "></i>
+                <router-link :to="{name:'cart'}" style="font-size: 16px"><a>您心仪的线路</a></router-link>
+              </el-button>
+            </el-tooltip>
+          </el-badge>
 
-    <el-container>
-      <el-header><h1>精选套餐</h1></el-header>
-      <el-container>
-        <el-aside width="200px">用户评价</el-aside>
-        <el-main>
-          <el-table align="center"
-                    :data="sysroute"
-                    border
-                    style="width: 100%">
-            <el-table-column align="center"
-                             prop="routeName"
-                             label="线路名称"
-                             width="150">
-            </el-table-column>
-            <el-table-column align="center"
-                             label="图片"
-                             width="180">
-              <template slot-scope="sysroute">
-                <router-link :to="{name:'detail',params:{routeId:sysroute.row.routeId}}"><img :src="sysroute.row.routePic" width="100" height="100" class="routePic"/></router-link>
-              </template>
-            </el-table-column>
-            <el-table-column align="center"
-                             prop="info1"
-                             label="卖点">
-            </el-table-column>
-            <el-table-column align="center"
-                             prop="info2"
-                             label="卖点">
-            </el-table-column>
-            <el-table-column align="center"
-                             prop="routeTime"
-                             label="出发时间">
-            </el-table-column>
-            <el-table-column align="center"
-                             prop="routePrice"
-                             label="套餐价格"
-                             width="100">
-            </el-table-column>
-            <el-table-column align="center"
-                             prop="routeNum"
-                             label="拼团人数"
-                             width="100">
-            </el-table-column>
-            <el-table-column align="center"
-                             prop="routeDay"
-                             label="游玩时长"
-                             width="100">
-            </el-table-column>
-          </el-table>
-        </el-main>
-      </el-container>
-    </el-container>
+        </div>
+      </el-col>
+    </el-row>
+    <!--轮播图-->
+    <div style="padding-top: 20px"></div>
+      <div class="block">
+        <el-carousel :interval="4000" type="card" height="500px">
+          <el-carousel-item v-for="sysattr in sysattr" :key="sysattr">
+            <router-link :to="{name:'detail',params:{attrId:sysattr.attrId}}"><img :src="sysattr.attrPic" style="width:900px;height:450px  "></router-link>
+          </el-carousel-item>
+        </el-carousel>
 
-    <el-container>
-      <el-header><h1>景点推荐</h1></el-header>
-      <el-container>
-        <el-aside width="200px">用户评价</el-aside>
-        <el-main>
-          <el-table align="center"
-                    :data="sysattr"
-                    border
-                    style="width: 100%">
-            <el-table-column align="center"
-                             prop="attrName"
-                             label="名称"
-                             width="150">
-            </el-table-column>
-            <el-table-column align="center"
-                             label="图片"
-                             width="180">
-              <template slot-scope="sysattr">
-                <router-link :to="{name:'detail',params:{attrId:sysattr.row.attrId}}"><img :src="sysattr.row.attrPic" width="100" height="100" class="attrPic"/></router-link>
-              </template>
-            </el-table-column>
-            <el-table-column align="center"
-                             prop="attrInfo"
-                             label="卖点">
-            </el-table-column>
-          </el-table>
+      </div>
+      <div style="padding-top: 20px"></div>
+        <!--热门线路推荐-->
+        <div>
+          <el-container>
+            <el-header id="h1"><h1>热门线路推荐</h1></el-header>
+            <div style="padding-top: 20px"></div>
+              <el-container v-for="(sysroute,index) in sysroute" style="float: left">
+                <el-aside width="500px" style="border: groove;height: 300px">
+                  <div style="width: 492px;height: 296px">
+                    <router-link :to="{name:'detail',params:{routId:sysroute.routeId}}"><img :src="sysroute.routePic" width="492px" height="296px" /></router-link>
+                  </div>
+                </el-aside>
+                <el-container style="border: groove;height: 300px">
+                  <el-header><h3>{{sysroute.routeName}}</h3></el-header>
+                  <el-main>{{sysroute.info1}}
+                  </el-main>
+                  <el-footer>
+                    <router-link :to="{name:'detail',params:{routId:sysroute.routeId}}"><el-button class="success">了解详情</el-button></router-link>
+                  </el-footer>
+                </el-container>
+              </el-container>
+          </el-container>
+        </div>
+        <div style="padding-top: 20px"></div>
+        <el-footer style="height: 120px;background-color: rgba(96, 225, 27, 0.1)">
 
-          <el-pagination
-            background
-            layout="prev, next"
-            :page-size="this.params.size"
-            v-on:current-change="changePage"
-            :total="total" :current-page="this.params.page">
-          </el-pagination>
-        </el-main>
-      </el-container>
-    </el-container>
+          <!--bottom-->
+          <el-row>
+            <el-col :span="24"  class="bg-purple">
+              <div style="height: 120px;line-height: 20px;font-size: 13px;text-align: center">
+                <ul>
+                  <li>
+                    <a href="">© lv.com 京ICP证110507号 京ICP备10046444号 京公网安备11010802020134号 京网文[2017]1530-131号</a>
+                  </li><br>
+                  <li>
+                    <a href="">（京）旅平台备字（2018）第00005号 互联网药品信息服务资格证 (京) -非经营性-2014-0090 营业执照 旅游公告</a>
+                  </li><br>
+                  <li>
+                    <a href="">增值电信业务许可证  网络食品经营备案（京）【2018】WLSPJYBAHF-12   食品经营许可证</a>
+                  </li><br>
+                  <li>
+                    <a href="">违法和不良信息举报电话：185-0130-1238 知识产权侵权投诉 本网站所列数据，除特殊说明，所有数据均出自我司，版权所有，盗版必究</a>
+                  </li>
+                </ul>
+              </div>
+            </el-col>
+          </el-row>
+
+        </el-footer>
+      <!--</el-container>-->
+    <!--</el-container>-->
   </div>
 </template>
 <script>
   import axios from 'axios'
+  import ElButton from "../../node_modules/element-ui/packages/button/src/button";
+  import ElInput from "../../node_modules/element-ui/packages/input/src/input";
   export default{
+    components: {
+      ElInput,
+      ElButton},
     data(){
       return{
+        msg:'',
         sysattr:[],
         sysroute:[],
         total: 0,
         params: {
-          size: 4,
+          size: 20,
           page: 1
         }
       }
     },
     mounted(){
-      this.query(),
-        this.find()
+      this.query();
+        this.find();
+      axios.get("api/getMsg").then(res=>{
+        this.msg=res.data
+
+      })
     },
     methods:{
       query:function () {
@@ -171,6 +217,9 @@
         axios.get(url).then(res=>{
           this.sysroute=res.data.list;
         })
+      },
+      search:function () {
+
       }
     }
   }
@@ -181,8 +230,8 @@
   #a{
     white-space:nowrap;
   }
-  .el-header{
-    background-color: #2577e1;
+  #h1{
+    background-color: rgba(96, 225, 27, 0.1);
     color: #333;
 
     text-align: center;
@@ -190,17 +239,19 @@
   }
 
   .el-aside {
-    background-color: #0F95FF;
+    background-color: rgba(210, 225, 219, 0);
     color: #333;
     text-align: center;
     line-height: 200px;
+    overflow: hidden;
   }
 
   .el-main {
-    background-color: #E9EEF3;
+    background-color: rgba(233, 238, 243, 0);
     color: #333;
     text-align: center;
     line-height: 160px;
+    overflow: hidden;
   }
 
   body > .el-container {
@@ -208,7 +259,7 @@
   }
 
   .el-carousel__item h3 {
-    color: #475669;
+    color: rgba(71, 86, 105, 0);
     font-size: 14px;
     opacity: 0.75;
     line-height: 200px;
@@ -216,15 +267,35 @@
   }
 
   .el-carousel__item:nth-child(2n) {
-    background-color: #99a9bf;
+    background-color: rgba(153, 169, 191, 0);
   }
 
   .el-carousel__item:nth-child(2n+1) {
-    background-color: #d3dce6;
+    background-color: rgba(211, 220, 230, 0);
   }
   a{
     text-decoration: none;
   }
 </style>
 
+<style scoped>
+  h1, h2 {
+    font-weight: normal;
+  }
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  li {
+    display: inline-block;
+    margin: 0 10px;
+  }
+  a:link {
+    color: #000000;
+    text-decoration-line: none;
+  }
+  a:hover{
+    color: red;
+  }
+</style>
 
