@@ -37,7 +37,11 @@
       </el-input><br><br>
 
       <br>
-      <div id="bt"><el-button type="success" round @click="addcart(sysroute.routeId)">加入购物车</el-button></div>
+      <div id="bt"><el-button type="success" round @click="addcart(sysroute.routeId)">加入购物车</el-button>
+        <el-button type="success" round @click="pay()">支付</el-button>
+      </div>
+
+
     </form>
   </div>
 </template>
@@ -73,7 +77,7 @@
     methods: {
       addcart: function (routeId) {
           alert(routeId)
-        var url = "api/sos/savecart"
+        var url = "api/savecart"
         axios.post(url,{routeId:routeId}).then(res => {
           alert(res.data)
           // console.log(res.data)

@@ -163,7 +163,7 @@
 //
 //      },
       query:function () {
-        var url ="api/sos/cartSelectAll"
+        var url ="api/cartSelectAll"
         axios.get(url).then(res=>{
             //alert(res.data)
          // console.log(res.data)
