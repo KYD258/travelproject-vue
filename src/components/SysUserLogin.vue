@@ -38,7 +38,7 @@
         var url = "api/sysuserlogin";
         axios.post(url,this.user).then(res=>{
           if(res.data==1){
-            this.$router.push("/show")
+            this.$router.push("/sysAdmin")
           }else {
             alert("用户名或密码错误")
           }
