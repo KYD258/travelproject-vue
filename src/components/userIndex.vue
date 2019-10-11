@@ -85,8 +85,8 @@
     </el-col>
       <el-col :span="12">
         <div class="grid-content" style="height: 80px;width:100%;">
-          <el-input ref="searchName" type="text" style="width: 80%;margin: auto;margin-top: 20px" placeholder="请输入内容"></el-input>
-          <el-button type="danger" icon="el-icon-search" plain @click="search()">查询</el-button>
+          <el-input ref="searchName" v-model="name" type="text" style="width: 80%;margin: auto;margin-top: 20px" placeholder="请输入内容"></el-input>
+          <el-button type="danger" icon="el-icon-search" plain @click="search(name)">查询</el-button>
         </div>
       </el-col>
       <el-col :span="6">
@@ -185,6 +185,7 @@
         sysattr:[],
         sysroute:[],
         total: 0,
+        name:'',
         params: {
           size: 20,
           page: 1
@@ -236,8 +237,9 @@
           this.sysroute=res.data.list;
         })
       },
-      search:function () {
-
+      search:function (name) {
+        var routeName=this.name
+        this.$router.push({path:"/findlike/"+routeName})
       }
     }
   }
