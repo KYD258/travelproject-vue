@@ -341,6 +341,7 @@
             if (res.data==1){
           this.$router.push('/cart')
             }else {
+                alert("对不起:请登录后操作")
               this.$router.push("/userLogin");
             }
         })

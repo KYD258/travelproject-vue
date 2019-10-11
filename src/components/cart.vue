@@ -201,7 +201,7 @@
     mounted(){
       this.query()
         axios.get("api/countcart").then(res=>{
-          alert(res.data)
+         // alert(res.data)
           this.count=res.data;
         })
     },
