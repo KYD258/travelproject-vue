@@ -4,6 +4,7 @@
       <el-header>
         <!--导航栏-->
         <el-row>
+            <el-col :span="14">
             <div class="grid-content bg-purple-light" style="color: black;line-height: 30px;font-size: 14px">
               <router-link type="info" :to="{name:'userOrder'}" style="color: black"><a>我的订单</a></router-link>
               <el-dropdown style="margin-left: 10px">
