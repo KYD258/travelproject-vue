@@ -338,7 +338,11 @@
       addcart: function (routeId) {
         var url = "api/savecart"
         axios.post(url,{routeId:routeId}).then(res => {
+            if (res.data==1){
           this.$router.push('/cart')
+            }else {
+              this.$router.push("/userLogin");
+            }
         })
       }
     }

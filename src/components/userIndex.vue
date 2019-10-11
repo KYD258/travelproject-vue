@@ -96,7 +96,7 @@
       </el-col>
       <el-col :span="6">
         <div class="grid-content" style="height: 80px;line-height: 80px">
-          <el-badge :value="100" :max="10" class="item">
+          <el-badge :value="count" :max="10" class="item" @click="countcart()">
             <el-tooltip content="点我" placement="bottom" effect="light">
               <el-button size="" plain style="width: 180px;height: 60px">
                 <i style="font-size: 16px; font-weight: bold;color:red"  class="el-icon-shopping-cart-full "></i>
@@ -186,6 +186,7 @@
     data(){
       return{
         msg:'',
+        count:'',
         sysattr:[],
         sysroute:[],
         total: 0,
@@ -201,9 +202,23 @@
       axios.get("api/getMsg").then(res=>{
         this.msg=res.data
 
-      })
+      }),
+        axios.get("api/countcart").then(res=>{
+          //alert(res.data)
+          this.count=res.data;
+        })
     },
     methods:{
+      countcart:function () {
+        axios.get("api/countcart").then(res=>{
+          //alert(res.data)
+          if (res.data!=0){
+            this.count=res.data;
+          }else {
+            this.$router.push("/userLogin");
+          }
+        })
+      },
       query:function () {
         var url ="api/attr/selectAll/"+this.params.page+"/"+this.params.size
         axios.get(url).then(res=>{

@@ -94,7 +94,7 @@
         </el-col>
         <el-col :span="6">
           <div class="grid-content" style="height: 80px;line-height: 80px">
-            <el-badge :value="100" :max="10" class="item">
+            <el-badge :value="count" :max="10" class="item">
               <el-tooltip content="点我" placement="bottom" effect="light">
                 <el-button size="" plain style="width: 180px;height: 60px">
                   <i style="font-size: 16px; font-weight: bold;color:red"  class="el-icon-shopping-cart-full "></i>
@@ -192,6 +192,7 @@
     data(){
       return {
           msg:'',
+        count:'',
         sysOrder:[],
         sysRoute: [],
         checked: true
@@ -199,6 +200,10 @@
     },
     mounted(){
       this.query()
+        axios.get("api/countcart").then(res=>{
+          alert(res.data)
+          this.count=res.data;
+        })
     },
     methods:{
       query:function () {
@@ -231,7 +236,7 @@
       },
       del:function (routeId) {
         axios.post("api/alipay/del",{routeId:routeId}).then(res=>{
-            alert(res.data)
+           // alert(res.data)
           this.query()
         })
       }
