@@ -4,31 +4,6 @@
       <el-header>
         <!--导航栏-->
         <el-row>
-          <el-col :span="10">
-            <div class="grid-content bg-purple" style="color: black;font-size: 14px;line-height: 30px">
-              <el-dropdown>
-          <span class="el-dropdown-link">
-            <a class="el-icon-location">地址</a><i class="el-icon-arrow-down el-icon--right"></i>
-          </span>
-                <el-dropdown-menu slot="dropdown">
-                  <el-dropdown-item >北京</el-dropdown-item>
-                  <el-dropdown-item>上海</el-dropdown-item>
-                  <el-dropdown-item>广州</el-dropdown-item>
-                  <el-dropdown-item>深圳</el-dropdown-item>
-                  <el-dropdown-item>杭州</el-dropdown-item>
-                </el-dropdown-menu>
-              </el-dropdown>
-              <a>..</a>
-              <router-link type="info" :to="{name:'userLogin'}" style="color:black"><a>{{msg}}</a></router-link>
-              <a>..</a>
-              <router-link type="info" :to="{name:'SysUserLogin'}" style="color:black"><a>管理员登录</a></router-link>
-              <a>..</a>
-              <router-link type="info" :to="{name:'userResgister'}" style="color:black"><a>免费注册</a></router-link>
-              <a>..</a>
-
-            </div>
-          </el-col>
-          <el-col :span="14">
             <div class="grid-content bg-purple-light" style="color: black;line-height: 30px;font-size: 14px">
               <router-link type="info" :to="{name:'userOrder'}" style="color: black"><a>我的订单</a></router-link>
               <el-dropdown style="margin-left: 10px">

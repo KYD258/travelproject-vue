@@ -17,13 +17,8 @@
                 <el-dropdown-item>杭州</el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
-            <a>..</a>
-            <router-link type="info" :to="{name:'userLogin'}" style="color:black"><a>{{msg}}</a></router-link>
-            <a>..</a>
-            <router-link type="info" :to="{name:'SysUserLogin'}" style="color:black"><a>管理员登录</a></router-link>
-            <a>..</a>
-            <router-link type="info" :to="{name:'userResgister'}" style="color:black"><a>免费注册</a></router-link>
-            <a>..</a>
+            <router-link type="info" v-if="msg=='登录'" :to="{name:'userLogin'}" style="color:black">{{msg}}</router-link>
+            <router-link type="info" v-else :to="{name:'tbUserUpdate'}" style="color:black"> <el-avatar :src="msg"></el-avatar></router-link>
           </div>
         </el-col>
         <el-col :span="14">
@@ -200,7 +195,11 @@
       this.query();
         this.find();
       axios.get("api/getMsg").then(res=>{
-        this.msg=res.data
+        if(res.data==''){
+          this.msg='登录'
+        }else {
+          this.msg=res.data.pic;
+        }
 
       }),
         axios.get("api/countcart").then(res=>{
