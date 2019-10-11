@@ -28,7 +28,7 @@ export default new Router({
     {path:'/detail',name:'detail',component:detail},
     {path:'/applyText',name:'applyText',component:applyText},
     {path:'/tbUserUpdate',name:'tbUserUpdate',component:tbUserUpdate},
-    {path:'/sysAdmin',name:'sysAdmin',component:sysAdmin}
+    {path:'/sysAdmin',name:'sysAdmin',component:sysAdmin},
     {path:'/tbUserUpdate',name:'tbUserUpdate',component:tbUserUpdate},
     {path:'/findlike/:routeName',name:'findlike',component:findlike}
   ]

@@ -120,13 +120,13 @@
             <el-header id="h1"><h1>热门线路推荐</h1></el-header>
             <div style="padding-top: 20px"></div>
               <el-container v-for="(sysroute,index) in sysroute" :key="sysroute" style="float: left">
-                <el-aside width="500px" style="border: groove;height: 300px">
+                <el-aside width="400px" style="height: 300px">
                   <div style="width: 492px;height: 296px">
                     <router-link :to="{name:'detail',params:{routeId:sysroute.routeId}}"><img :src="sysroute.routePic" width="492px" height="296px" /></router-link>
 
                   </div>
                 </el-aside>
-                <el-container style="border: groove;height: 300px">
+                <el-container style="height: 300px">
                   <el-header><h3>{{sysroute.routeName}}</h3></el-header>
                   <el-main>{{sysroute.info1}}
                   </el-main>
