@@ -1,7 +1,88 @@
 <template>
-  <div style="background-color: whitesmoke">
-    <h1></h1>
-    <br>
+  <div>
+    <el-header>
+      <!--导航栏-->
+      <el-row>
+        <el-col :span="10">
+          <div class="grid-content bg-purple" style="color: black;font-size: 14px;line-height: 30px">
+            <el-dropdown>
+          <span class="el-dropdown-link">
+            <a class="el-icon-location">地址</a><i class="el-icon-arrow-down el-icon--right"></i>
+          </span>
+              <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item >北京</el-dropdown-item>
+                <el-dropdown-item>上海</el-dropdown-item>
+                <el-dropdown-item>广州</el-dropdown-item>
+                <el-dropdown-item>深圳</el-dropdown-item>
+                <el-dropdown-item>杭州</el-dropdown-item>
+              </el-dropdown-menu>
+            </el-dropdown>
+            <a>..</a>
+            <router-link type="info" :to="{name:'userLogin'}" style="color:black"><a>{{msg}}</a></router-link>
+            <a>..</a>
+            <router-link type="info" :to="{name:'SysUserLogin'}" style="color:black"><a>管理员登录</a></router-link>
+            <a>..</a>
+            <router-link type="info" :to="{name:'userResgister'}" style="color:black"><a>免费注册</a></router-link>
+            <a>..</a>
+          </div>
+        </el-col>
+        <el-col :span="14">
+          <div class="grid-content bg-purple-light" style="color: black;line-height: 30px;font-size: 14px">
+            <router-link type="info" :to="{name:'userOrder'}" style="color: black"><a>我的订单</a></router-link>
+            <el-dropdown style="margin-left: 10px">
+          <span class="el-dropdown-link">
+            <a>个人中心</a><i class="el-icon-arrow-down el-icon--left"></i>
+          </span>
+              <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item><router-link :to="{name:'userIndex'}">不要点我！</router-link></el-dropdown-item>
+                <!--<el-dropdown-item>修改信息</el-dropdown-item>-->
+                <!--<el-dropdown-item>3</el-dropdown-item>-->
+                <!--<el-dropdown-item>4</el-dropdown-item>-->
+                <!--<el-dropdown-item>5</el-dropdown-item>-->
+              </el-dropdown-menu>
+            </el-dropdown>
+            <el-dropdown>
+          <span class="el-dropdown-link">
+            <a>企业采购</a><i class="el-icon-arrow-down el-icon--left"></i>
+          </span>
+              <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item>1</el-dropdown-item>
+                <el-dropdown-item>2</el-dropdown-item>
+                <el-dropdown-item>3</el-dropdown-item>
+                <el-dropdown-item>4</el-dropdown-item>
+                <el-dropdown-item>5</el-dropdown-item>
+              </el-dropdown-menu>
+            </el-dropdown>
+            <el-dropdown>
+          <span class="el-dropdown-link">
+            <a>客户服务</a><i class="el-icon-arrow-down el-icon--left"></i>
+          </span>
+              <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item>1</el-dropdown-item>
+                <el-dropdown-item>2</el-dropdown-item>
+                <el-dropdown-item>3</el-dropdown-item>
+                <el-dropdown-item>4</el-dropdown-item>
+                <el-dropdown-item>5</el-dropdown-item>
+              </el-dropdown-menu>
+            </el-dropdown>
+            <el-dropdown>
+          <span class="el-dropdown-link">
+            <a>网站导航</a><i class="el-icon-arrow-down el-icon--left"></i>
+          </span>
+              <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item>1</el-dropdown-item>
+                <el-dropdown-item>2</el-dropdown-item>
+                <el-dropdown-item>3</el-dropdown-item>
+                <el-dropdown-item>4</el-dropdown-item>
+                <el-dropdown-item>5</el-dropdown-item>
+              </el-dropdown-menu>
+            </el-dropdown>
+          </div>
+        </el-col>
+      </el-row>
+    </el-header>
+    <div  style="background-color: whitesmoke">
+      <br>
     <form>
       <input v-model="sysattr.attrId" hidden>
     </form>
@@ -139,6 +220,33 @@
       </el-table>
 
     </form>
+    </div>
+    <div style="padding-top: 20px"></div>
+    <el-footer style="height: 120px;background-color: rgba(96, 225, 27, 0.1)">
+
+      <!--bottom-->
+      <el-row>
+        <el-col :span="24"  class="bg-purple">
+          <div style="height: 120px;line-height: 20px;font-size: 13px;text-align: center">
+            <ul>
+              <li>
+                <a href="">© lv.com 京ICP证110507号 京ICP备10046444号 京公网安备11010802020134号 京网文[2017]1530-131号</a>
+              </li><br>
+              <li>
+                <a href="">（京）旅平台备字（2018）第00005号 互联网药品信息服务资格证 (京) -非经营性-2014-0090 营业执照 旅游公告</a>
+              </li><br>
+              <li>
+                <a href="">增值电信业务许可证  网络食品经营备案（京）【2018】WLSPJYBAHF-12   食品经营许可证</a>
+              </li><br>
+              <li>
+                <a href="">违法和不良信息举报电话：185-0130-1238 知识产权侵权投诉 本网站所列数据，除特殊说明，所有数据均出自我司，版权所有，盗版必究</a>
+              </li>
+            </ul>
+          </div>
+        </el-col>
+      </el-row>
+
+    </el-footer>
   </div>
 </template>
 
@@ -248,9 +356,6 @@
     display: inline-block;
     margin: 0 10px;
   }
-  a {
-    color: #42b983;
-  }
   #pic {
     margin-left: auto;
     float: left;
@@ -267,6 +372,76 @@
   }
   .sd{
     margin-right: 180px;
+  }
+
+  #a{
+    white-space:nowrap;
+  }
+  #h1{
+    background-color: rgba(96, 225, 27, 0.1);
+    color: #333;
+
+    text-align: center;
+    line-height: 30px;
+  }
+
+  .el-aside {
+    background-color: rgba(210, 225, 219, 0);
+    color: #333;
+    text-align: center;
+    line-height: 200px;
+    overflow: hidden;
+  }
+
+  .el-main {
+    background-color: rgba(233, 238, 243, 0);
+    color: #333;
+    text-align: center;
+    line-height: 160px;
+    overflow: hidden;
+  }
+
+  body > .el-container {
+    margin-bottom: 40px;
+  }
+
+  .el-carousel__item h3 {
+    color: rgba(71, 86, 105, 0);
+    font-size: 14px;
+    opacity: 0.75;
+    line-height: 200px;
+    margin: 0;
+  }
+
+  .el-carousel__item:nth-child(2n) {
+    background-color: rgba(153, 169, 191, 0);
+  }
+
+  .el-carousel__item:nth-child(2n+1) {
+    background-color: rgba(211, 220, 230, 0);
+  }
+  a{
+    text-decoration: none;
+  }
+</style>
+<style scoped>
+  h1, h2 {
+    font-weight: normal;
+  }
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  li {
+    display: inline-block;
+    margin: 0 10px;
+  }
+  a:link {
+    color: #000000;
+    text-decoration-line: none;
+  }
+  a:hover{
+    color: red;
   }
 </style>
 
