@@ -195,7 +195,7 @@
     </el-row>
     <br>
     <template slot-scope="sysroute">
-      <router-link :to="{name:'detail',params:{routeId:sysroute.row.routeId}}"><img :src="sysroute.row.routePic" width="100" height="100" class="routePic"/></router-link>
+      <img :src="sysroute.row.routePic" width="100" height="100" class="routePic"/>
     </template>
 
     <form>
@@ -210,7 +210,7 @@
         <el-table-column align="center"
                         >
           <template slot-scope="sysattr">
-            <router-link :to="{name:'detail',params:{attrId:sysattr.row.attrId}}"><img :src="sysattr.row.attrPic" width="500" height="300" class="attrPic"/></router-link>
+            <img :src="sysattr.row.attrPic" width="500" height="300" class="attrPic"/>
           </template>
         </el-table-column>
         <el-table-column align="center"
@@ -311,16 +311,6 @@
       var u="api/route/selectById"
       var id=this.$route.params.routeId
       var ur="api/route/selectByrouteId"
-      axios.post(url,{attrId:ids}).then(res=>{
-        if(res.data!=null){
-          this.sysroute=res.data
-          axios.post(ur,{routeId:this.sysroute.routeId}).then(r=>{
-            if(r.data!=null){
-              this.sysattr=r.data
-            }
-          })
-        }
-      }),
         axios.post(u,{routeId:id}).then(res=>{
           if(res.data!=null){
             this.sysroute=res.data
@@ -330,6 +320,17 @@
           axios.post(ur,{routeId:id}).then(res=>{
             if(res.data!=null){
               this.sysattr=res.data
+            }
+          })
+        }else{
+          axios.post(url,{attrId:ids}).then(res=>{
+            if(res.data!=null){
+              this.sysroute=res.data
+              axios.post(ur,{routeId:this.sysroute.routeId}).then(r=>{
+                if(r.data!=null){
+                  this.sysattr=r.data
+                }
+              })
             }
           })
         }
