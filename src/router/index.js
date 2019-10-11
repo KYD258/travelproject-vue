@@ -11,6 +11,7 @@ import cart from '@/components/cart'
 import detail from '@/components/detail'
 import applyText from '@/components/applyText'
 import tbUserUpdate from '@/components/tbUserUpdate'
+import sysAdmin from '@/components/sysAdmin'
 Vue.use(Router)
 
 export default new Router({
@@ -25,6 +26,7 @@ export default new Router({
     {path:'/cart',name:'cart',component:cart},
     {path:'/detail',name:'detail',component:detail},
     {path:'/applyText',name:'applyText',component:applyText},
-    {path:'/tbUserUpdate',name:'tbUserUpdate',component:tbUserUpdate}
+    {path:'/tbUserUpdate',name:'tbUserUpdate',component:tbUserUpdate},
+    {path:'/sysAdmin',name:'sysAdmin',component:sysAdmin}
   ]
 })

@@ -1,7 +1,10 @@
 <template>
   <div>
-    <el-page-header @back="goBack" content="登录页面">
-    </el-page-header>
+    <el-breadcrumb separator-class="el-icon-arrow-right">
+      <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+      <el-breadcrumb-item :to="{ path: '/SysUserLogin' }">管理员登录</el-breadcrumb-item>
+      <el-breadcrumb-item :to="{ path: '/userResgister' }">用户注册</el-breadcrumb-item>
+    </el-breadcrumb>
   <div style="height: 400px;width: 300px;padding-left: 550px">
     <h1>{{msg}}</h1>
     <el-form :model="tbUser" ref="tbUser">
@@ -61,9 +64,6 @@
             return false;
           }
         });
-      },
-      goBack() {
-        this.$router.push("/");
       },
       resetForm(formName) {
         this.$refs[formName].resetFields();

@@ -1,9 +1,18 @@
 <template>
   <div>
-    <el-page-header @back="goBack" content="注册页面">
-    </el-page-header>
-  <div style="margin: auto;width: 550px;">
     <h1>{{msg}}</h1>
+  <div style="margin: auto;width: 550px;">
+
+    <el-upload
+      class="avatar-uploader"
+      action="api/getPath"
+      :show-file-list="false"
+      :on-success="tbUserPath"
+      :before-upload="beforeAvatarUpload">
+      <img v-if="tbUser.pic" :src="tbUser.pic" class="avatar">
+      <i v-else class="el-icon-plus
+          avatar-uploader-icon"></i>
+    </el-upload>
     <el-form :label-position="labelPosition" label-width="80px" :model="tbUser">
       <el-form-item label="用户名">
         <el-input v-model="tbUser.loginName"></el-input>
@@ -87,8 +96,21 @@
            }
         })
       },
-      goBack() {
-        this.$router.push("/");
+      tbUserPath:function (res,file) {
+        this.tbUser.pic=res;
+        alert(this.tbUser.pic);
+      },
+      beforeAvatarUpload(file) {
+        const isJPG = file.type === 'image/jpeg';
+        const isLt2M = file.size / 1024 / 1024 < 2;
+
+        if (!isJPG) {
+          this.$message.error('上传头像图片只能是 JPG 格式!');
+        }
+        if (!isLt2M) {
+          this.$message.error('上传头像图片大小不能超过 2MB!');
+        }
+        return isJPG && isLt2M;
       },
       register:function () {
         axios.post("/api/userRegister",{"tbUser":this.tbUser,"code":this.code}).then(res=>{
@@ -107,3 +129,28 @@
     }
   }
 </script>
+<style>
+  .avatar-uploader .el-upload {
+    border: 1px dashed #d9d9d9;
+    border-radius: 50px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+  .avatar-uploader .el-upload:hover {
+    border-color: #409EFF;
+  }
+  .avatar-uploader-icon {
+    font-size: 28px;
+    color: #8c939d;
+    width: 100px;
+    height: 100px;
+    line-height: 100px;
+    text-align: center;
+  }
+  .avatar {
+    width: 100px;
+    height: 100px;
+    display: block;
+  }
+</style>
