@@ -203,22 +203,28 @@
       var u="api/route/selectById"
       var id=this.$route.params.routeId
       var ur="api/route/selectByrouteId"
-
       axios.post(url,{attrId:ids}).then(res=>{
         if(res.data!=null){
           this.sysroute=res.data
+          axios.post(ur,{routeId:this.sysroute.routeId}).then(r=>{
+            if(r.data!=null){
+              this.sysattr=r.data
+            }
+          })
         }
       }),
         axios.post(u,{routeId:id}).then(res=>{
           if(res.data!=null){
             this.sysroute=res.data
           }
-        }) ,
-        axios.post(ur,{routeId:id}).then(res=>{
-          if(res.data!=null){
-            this.sysattr=res.data
-          }
         })
+        if(ids == undefined){
+          axios.post(ur,{routeId:id}).then(res=>{
+            if(res.data!=null){
+              this.sysattr=res.data
+            }
+          })
+        }
     },
     methods: {
       addcart: function (routeId) {

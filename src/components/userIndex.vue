@@ -118,16 +118,18 @@
         </el-carousel>
 
       </div>
+
       <div style="padding-top: 20px"></div>
         <!--热门线路推荐-->
         <div>
           <el-container>
             <el-header id="h1"><h1>热门线路推荐</h1></el-header>
             <div style="padding-top: 20px"></div>
-              <el-container v-for="(sysroute,index) in sysroute" style="float: left">
+              <el-container v-for="(sysroute,index) in sysroute" :key="sysroute" style="float: left">
                 <el-aside width="500px" style="border: groove;height: 300px">
                   <div style="width: 492px;height: 296px">
-                    <router-link :to="{name:'detail',params:{routId:sysroute.routeId}}"><img :src="sysroute.routePic" width="492px" height="296px" /></router-link>
+                    <router-link :to="{name:'detail',params:{routeId:sysroute.routeId}}"><img :src="sysroute.routePic" width="492px" height="296px" /></router-link>
+
                   </div>
                 </el-aside>
                 <el-container style="border: groove;height: 300px">
@@ -135,7 +137,7 @@
                   <el-main>{{sysroute.info1}}
                   </el-main>
                   <el-footer>
-                    <router-link :to="{name:'detail',params:{routId:sysroute.routeId}}"><el-button class="success">了解详情</el-button></router-link>
+                    <router-link :to="{name:'detail',params:{routeId:sysroute.routeId}}"><el-button class="success">了解详情</el-button></router-link>
                   </el-footer>
                 </el-container>
               </el-container>
@@ -169,7 +171,9 @@
         </el-footer>
       <!--</el-container>-->
     <!--</el-container>-->
+
   </div>
+
 </template>
 <script>
   import axios from 'axios'
