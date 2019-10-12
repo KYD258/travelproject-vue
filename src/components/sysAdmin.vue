@@ -1,5 +1,35 @@
 <template>
   <div>
+<!--管理员-->
+    <el-button @click="sysuser = true" type="primary" style="margin-left: 16px;">
+      管理员
+    </el-button>
+    <el-drawer title="" :visible.sync="sysuser" size="20%">
+      <div>
+        Welcome     {{sysUser.username}}<br/>
+        <el-button @click="sysuser2 = true">修改管理员信息</el-button><br>
+        <el-button @click="SysUserLoginOut()">注销登陆</el-button>
+        <el-drawer title="" :append-to-body="true" :visible.sync="sysuser2" size="50%">
+          <!--修改管理员信息-->
+          <form>
+            <!--<input v-model="sysUser.userid" hidden>-->
+            <el-input placeholder="电话" v-model="sysUser.phone" size="large" style="width: 400px">
+              <template slot="prepend" >电话</template>
+            </el-input><br><br>
+            <el-input placeholder="邮箱" v-model="sysUser.email" size="large" style="width: 400px">
+              <template slot="prepend" >邮箱</template>
+            </el-input><br>
+            <el-button type="success" round @click="sysuserupdate()">确认修改</el-button>
+          </form>
+        </el-drawer>
+      </div>
+    </el-drawer>
+
+
+
+
+
+
     <!--景点-->
     <el-button @click="attrDrawer = true" type="primary" style="margin-left: 16px;">
       景点管理
@@ -197,6 +227,10 @@
       ElDivider},
     data() {
       return {
+          sysUser:{ userid:'',username:'', password:'', phone:'', email:''},
+
+        sysuser:false,
+        sysuser2:false,
         attrDrawer:false,
         addAttr:false,
         selectAttr:false,
@@ -228,6 +262,7 @@
       };
     },
     mounted(){
+      this.SysuserQuery();
       this.attrQuery();
       this.routeQuery();
       this.orderQuery();
@@ -391,6 +426,65 @@
         this.routeParams.page=page;
         this.orderQuery()
       },
+
+      //管理员信息
+      SysuserQuery:function () {
+         // alert("3153")
+        axios.get("api/getMsgSysUser").then(res=>{
+           // alert(res.data)
+          this.sysUser=res.data;
+
+        })
+      },
+      //管理员信息修改
+      sysuserupdate:function () {
+        this.$confirm('此操作将修改该文件, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          var url="api/updateSysUser"
+          axios.post(url,this.sysUser).then(res=> {
+            if (res.data ==1) {
+              this.$router.push("/sysAdmin")
+            }
+          })
+          this.$message({
+            type: 'success',
+            message: '修改成功!'
+          });
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消修改'
+          });
+        });
+      },
+      //管理员注销登陆
+      SysUserLoginOut:function () {
+        this.$confirm('此操作将退出登陆状态, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          var url="api/SysUserLoginOut"
+          axios.post(url).then(res=> {
+            if (res.data !=null) {
+              this.$router.push("/")
+            }
+          })
+          this.$message({
+            type: 'success',
+            message: '退出成功!'
+          });
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消退出'
+          });
+        });
+      }
+
 //      orderDelete:function (orderId){
 //        var url='api/sos/deleteOrder'
 //        axios.post(url,{orderId:orderId}).then(res=>{
@@ -403,6 +497,7 @@
 //        })
 //
 //      },
+
 
     }
   };
