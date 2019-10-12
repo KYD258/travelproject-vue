@@ -62,6 +62,17 @@
             <el-input placeholder="请输入景点价格" v-model="sysAttr.attrPrice" size="large" style="width: 450px">
               <template slot="prepend" >景点价格</template>
             </el-input><br>
+            <template>
+              <div class="el-upload__tip">请选择该景点要加入的套餐</div>
+              <el-select @change="selectGet" v-model="sysRoute" placeholder="请选择要加入的套餐">
+                <el-option
+                  v-for="item in sysroute"
+                  :key="item.routeId"
+                  :label="item.routeName"
+                  :value="item.routeId">
+                </el-option>
+              </el-select>
+            </template>
             <br>
             <el-button type="success" round @click="attrAdd()">新增景点</el-button>
           </form>
@@ -240,7 +251,7 @@
         sysOder:false,
         selectOder:false,
 
-        sysAttr:{attrId:'',attrName:'',attrPic:'',attrAddress:'',attrInfo:'',attrPrice:''},
+        sysAttr:{attrId:'',attrName:'',attrPic:'',attrAddress:'',attrInfo:'',attrPrice:'',routeId:''},
         attrfile:'',
         sysattr: [],
         attrTotal: 0,
@@ -250,7 +261,8 @@
         routefile:'',
         sysroute:[],
         routeTotal: 0,
-        routeParams: {size: 3,page: 1},
+        routeParams: {size: 4,page: 1},
+        vId:0,
 
         order: [],
         orderTotal:100,
@@ -268,6 +280,14 @@
       this.orderQuery();
     },
     methods: {
+      selectGet:function(vId){
+        let obj = {};
+        obj = this.sysroute.find((item) => {//这里的selectList就是上面遍历的数据源
+          return item.routeId === vId;//筛选出匹配数据
+        });
+        this.vId=vId
+        alert(this.vId)
+      },
 //        景点
 //      attrUploadfile:function () {},
 //      attrUploadPic:function (event) {
@@ -289,6 +309,8 @@
         alert(this.sysAttr.attrPic);
       },
       attrAdd:function () {
+        this.sysAttr.routeId=this.vId
+//        alert(this.sysAttr.routeId)
         console.log(this.sysAttr)
         var url="api/attr/save"
         axios.post(url,this.sysAttr).then(res=>{
