@@ -2,7 +2,7 @@
   <div>
     <el-header>
       <!--导航栏-->
-      <el-row>
+      <el-row style="margin-top: 30px">
         <el-col :span="10">
           <div class="grid-content bg-purple" style="color: black;font-size: 14px;line-height: 30px">
             <el-dropdown>
@@ -17,19 +17,20 @@
                 <el-dropdown-item>杭州</el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
-            <router-link type="info" v-if="msg=='登录'" :to="{name:'userLogin'}" style="color:black">{{msg}}</router-link>
-            <router-link type="info" v-else :to="{name:'tbUserUpdate'}" style="color:black"> <el-avatar :src="msg"></el-avatar></router-link>
+
           </div>
         </el-col>
         <el-col :span="14">
           <div class="grid-content bg-purple-light" style="color: black;line-height: 30px;font-size: 14px">
             <el-dropdown style="margin-left: 10px">
           <span class="el-dropdown-link">
-            <a>个人中心</a><i class="el-icon-arrow-down el-icon--left"></i>
+            <i class=""></i>
+            <a>个人中心</a>
+            <i class="el-icon-arrow-down el-icon--left"></i>
           </span>
               <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item><router-link :to="{name:'userIndex'}">不要点我！</router-link></el-dropdown-item>
-                <!--<el-dropdown-item>修改信息</el-dropdown-item>-->
+                <!--<el-dropdown-item><router-link :to="{name:'userIndex'}">不要点我！</router-link></el-dropdown-item>-->
+                  <!--<el-dropdown-item>修改信息</el-dropdown-item>-->
                 <!--<el-dropdown-item>3</el-dropdown-item>-->
                 <!--<el-dropdown-item>4</el-dropdown-item>-->
                 <!--<el-dropdown-item>5</el-dropdown-item>-->
@@ -61,14 +62,16 @@
             </el-dropdown>
             <el-dropdown>
           <span class="el-dropdown-link">
-            <a>网站导航</a><i class="el-icon-arrow-down el-icon--left"></i>
+            <router-link type="info" v-if="msg=='登录'" :to="{name:'userLogin'}" style="color:black">{{msg}}</router-link>
+            <router-link type="info" v-else :to="{name:'tbUserUpdate'}" style="color:black"> <el-avatar :src="msg"></el-avatar></router-link>
           </span>
               <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item>1</el-dropdown-item>
-                <el-dropdown-item>2</el-dropdown-item>
-                <el-dropdown-item>3</el-dropdown-item>
-                <el-dropdown-item>4</el-dropdown-item>
-                <el-dropdown-item>5</el-dropdown-item>
+                <el-dropdown-item v-if="showItem">
+                  <el-link :underline="false" @click="toTbUserUpdate()">个人中心</el-link>
+                </el-dropdown-item>
+                <el-dropdown-item v-if="showItem">
+                  <el-link :underline="false" @click="outLogin()">退出登录</el-link>
+                </el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
           </div>
@@ -174,6 +177,7 @@
   import ElButton from "../../node_modules/element-ui/packages/button/src/button";
   import ElInput from "../../node_modules/element-ui/packages/input/src/input";
   export default{
+    inject:['reload'],
     components: {
       ElInput,
       ElButton},
@@ -188,7 +192,8 @@
         params: {
           size: 20,
           page: 1
-        }
+        },
+        showItem:false,
       }
     },
     mounted(){
@@ -199,6 +204,7 @@
           this.msg='登录'
         }else {
           this.msg=res.data.pic;
+          this.showItem=true;
         }
 
       }),
@@ -239,6 +245,17 @@
       search:function (name) {
         var routeName=this.name
         this.$router.push({path:"/findlike/"+routeName})
+      },
+      toTbUserUpdate:function () {
+        if(this.msg=="登录"){
+            this.$router.push("/userLogin");
+        }else {
+            this.$router.push("/tbUserUpdate")
+        }
+      },
+      outLogin:function () {
+        axios.get("api/outLogin").then(res=>{});
+        this.reload();
       }
     }
   }
@@ -294,6 +311,9 @@
   }
   a{
     text-decoration: none;
+  }
+  .el-dropdown-menu{
+    width: 120px;
   }
 </style>
 

@@ -1,5 +1,9 @@
 <template>
-  <div>
+  <div class="note" :style="note">
+    <el-breadcrumb separator-class="el-icon-arrow-right">
+      <el-breadcrumb-item :to="{path:'/'}">首页</el-breadcrumb-item>
+      <el-breadcrumb-item>管理界面</el-breadcrumb-item>
+    </el-breadcrumb>
 <!--管理员-->
     <el-button @click="sysuser = true" type="primary" style="margin-left: 16px;">
       管理员
@@ -167,8 +171,8 @@
               </template>
             </el-table-column>
             <el-table-column align="center" prop="routeArea" label="地址" width="140"  ></el-table-column>
-            <el-table-column align="center" prop="info1" label="卖点1"></el-table-column>
-            <el-table-column align="center" prop="info2" label="卖点2"></el-table-column>
+            <el-table-column align="center" prop="info1" label="卖点1" :show-overflow-tooltip="true"></el-table-column>
+            <el-table-column align="center" prop="info2" label="卖点2" :show-overflow-tooltip="true"></el-table-column>
             <el-table-column align="center" prop="routeTime" label="卖点"></el-table-column>
             <el-table-column align="center" prop="routePrice" label="套餐价格" width="100"></el-table-column>
             <el-table-column align="center" prop="routeNum" label="拼团人数" width="100"></el-table-column>
@@ -202,7 +206,7 @@
             <el-table-column prop="tbUser.email" label="邮箱" width="200  "></el-table-column>
             <el-table-column prop="sysRoute.routeName" label="线路名" width="200"></el-table-column>
             <el-table-column prop="sysRoute.routeArea" label="线路所属区域" width="120"></el-table-column>
-            <el-table-column prop="sysRoute.info1" label="备注" width="100"></el-table-column>
+            <el-table-column prop="sysRoute.info1" label="备注" width="100" :show-overflow-tooltip="true"></el-table-column>
             <el-table-column prop="sysRoute.info2" label="补充" width="100"></el-table-column>
             <el-table-column prop="sysRoute.routeTime" label="线路生成时间" width="200"></el-table-column>
             <el-table-column prop="sysRoute.routePrice" label="价格" width="100"></el-table-column>
@@ -238,7 +242,13 @@
       ElDivider},
     data() {
       return {
-          sysUser:{ userid:'',username:'', password:'', phone:'', email:''},
+
+        sysUser:{ userid:'',username:'', password:'', phone:'', email:''},
+
+        note:{
+          backgroundImage: 'url(' + require('@/assets/003.jpg') + ')',
+          backgroundSize:'100% 100%'
+        },
 
         sysuser:false,
         sysuser2:false,
@@ -538,6 +548,14 @@
   }
   a {
     color: #42b983;
+  }
+  .note{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top:0;
+    left: 0;
+    overflow-y: auto;
   }
 </style>
 
