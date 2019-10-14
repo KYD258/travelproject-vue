@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="note">
     <el-header>
       <!--导航栏-->
       <el-row style="margin-top: 30px">
@@ -95,7 +95,7 @@
         <div class="grid-content" style="height: 80px;line-height: 80px">
           <el-badge :value="count" :max="10" class="item" @click="countcart()">
             <el-tooltip content="点我" placement="bottom" effect="light">
-              <el-button size="" plain style="width: 180px;height: 60px">
+              <el-button size="" plain style="width: 180px;height: 60px" @click="toCart()">
                 <i style="font-size: 16px; font-weight: bold;color:red"  class="el-icon-shopping-cart-full "></i>
                 <router-link :to="{name:'cart'}" style="font-size: 16px"><a>您心仪的线路</a></router-link>
               </el-button>
@@ -211,7 +211,14 @@
         axios.get("api/countcart").then(res=>{
           //alert(res.data)
           this.count=res.data;
-        })
+        }),
+        this.timer = setInterval(this.open1, 3000);
+      this.timer = setInterval(this.open2, 6000);
+      this.timer = setInterval(this.open3, 9000);
+      this.timer = setInterval(this.open4, 12000);
+      this.timer = setInterval(this.open5, 15000);
+      this.timer = setInterval(this.open6, 18000);
+
     },
     methods:{
       countcart:function () {
@@ -246,6 +253,16 @@
         var routeName=this.name
         this.$router.push({path:"/findlike/"+routeName})
       },
+      toCart:function () {
+        axios.get("api/validation").then(res=>{
+          if(res.data=='none'){
+            alert("请登录！")
+            this.$router.push("/userLogin")
+          }else{
+            this.$router.push("/cart")
+          }
+        })
+      },
       toTbUserUpdate:function () {
         if(this.msg=="登录"){
             this.$router.push("/userLogin");
@@ -256,7 +273,75 @@
       outLogin:function () {
         axios.get("api/outLogin").then(res=>{});
         this.reload();
-      }
+      },
+      open1() {
+        this.$notify({
+          title: '评论',
+          message: '东京真好玩！！！你懂得！',
+          duration: 500,
+          position: 'bottom-left'
+        });
+      },
+      open2() {
+        this.$notify({
+          title: '评论',
+          message: "日本约起？",
+          duration: 1000,
+          position: 'bottom-left'
+        });
+      },
+      open3() {
+        this.$notify({
+          title: '评论',
+          message: "还是云南好玩！",
+          duration: 1500,
+          position: 'bottom-left'
+        });
+      }, open4() {
+        this.$notify({
+          title: '评论',
+          message: "丽江都被玩坏了",
+          duration: 2000,
+          position: 'bottom-left'
+        });
+      }, open5() {
+        this.$notify({
+          title: '评论',
+          message: "壮哉我大西安",
+          duration: 2500,
+          position: 'bottom-left'
+        });
+      }, open6() {
+        this.$notify({
+          title: '评论',
+          message: "来成都耍起，巴适的很！",
+          duration: 3000,
+          position: 'bottom-left'
+        });
+      }, open7() {
+        this.$notify({
+          title: '评论',
+          message: '耍麻将噻！！！',
+          duration: 3500,
+          position: 'bottom-left'
+
+        });
+      }, open8() {
+        this.$notify({
+          title: '评论',
+          message: '四川小妹乖得很！',
+          duration: 4000,
+          position: 'bottom-left'
+        });
+      },open9() {
+        this.$notify({
+          title: '评论',
+          message: '66666666',
+          duration: 4500,
+          position: 'bottom-left'
+        });
+      },
+
     }
   }
 </script>
@@ -335,6 +420,14 @@
   }
   a:hover{
     color: red;
+  }
+  .note{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top:0;
+    left: 0;
+    overflow-y: auto;
   }
 </style>
 

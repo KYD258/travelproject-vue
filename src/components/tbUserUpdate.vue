@@ -2,7 +2,7 @@
   <div>
     <el-breadcrumb separator-class="el-icon-arrow-right">
       <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-      <el-breadcrumb-item :to="{ path: '/' }">我的订单</el-breadcrumb-item>
+      <el-breadcrumb-item :to="{ path: '/userOrder' }">我的订单</el-breadcrumb-item>
       <el-breadcrumb-item :to="{ path: '/cart' }">购物车</el-breadcrumb-item>
       <!--点击头像注销-->
       <el-breadcrumb-item :to="{ path:'/userLogin' }">请重新登录</el-breadcrumb-item>

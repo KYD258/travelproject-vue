@@ -167,13 +167,12 @@
             <el-table-column align="center" prop="routeId" label="编号" width="100"></el-table-column>
             <el-table-column align="center" prop="routeName" label="线路名称" width="150"></el-table-column>
             <el-table-column align="center" label="图片" width="180"><template slot-scope="sysroute">
-                <img :src="sysroute.row.routePic" width="100" height="100" class="routePic"/>
+                <img :src="sysroute.row.routePic" width="60" height="40" class="routePic"/>
               </template>
             </el-table-column>
             <el-table-column align="center" prop="routeArea" label="地址" width="140"  ></el-table-column>
             <el-table-column align="center" prop="info1" label="卖点1" :show-overflow-tooltip="true"></el-table-column>
             <el-table-column align="center" prop="info2" label="卖点2" :show-overflow-tooltip="true"></el-table-column>
-            <el-table-column align="center" prop="routeTime" label="卖点"></el-table-column>
             <el-table-column align="center" prop="routePrice" label="套餐价格" width="100"></el-table-column>
             <el-table-column align="center" prop="routeNum" label="拼团人数" width="100"></el-table-column>
             <el-table-column align="center" prop="routeDay" label="游玩时长" width="100"></el-table-column>

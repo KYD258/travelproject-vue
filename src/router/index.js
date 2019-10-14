@@ -13,6 +13,7 @@ import applyText from '@/components/applyText'
 import tbUserUpdate from '@/components/tbUserUpdate'
 import sysAdmin from '@/components/sysAdmin'
 import findlike from '@/components/findlike'
+import userOrder from '@/components/userOrder'
 Vue.use(Router)
 
 export default new Router({
@@ -30,6 +31,7 @@ export default new Router({
     {path:'/tbUserUpdate',name:'tbUserUpdate',component:tbUserUpdate},
     {path:'/sysAdmin',name:'sysAdmin',component:sysAdmin},
     {path:'/tbUserUpdate',name:'tbUserUpdate',component:tbUserUpdate},
-    {path:'/findlike/:routeName',name:'findlike',component:findlike}
+    {path:'/findlike/:routeName',name:'findlike',component:findlike},
+    {path:'/userOrder',name:'findlike',component:userOrder},
   ]
 })
